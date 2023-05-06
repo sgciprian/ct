@@ -1,0 +1,9 @@
+stages:
+- test
+
+test-library:
+  stage: test
+  script:
+  - echo "Starting tests now"
+  - lean --run src/*.lean
+  - echo "Done"
