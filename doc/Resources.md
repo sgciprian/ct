@@ -10,9 +10,11 @@
 ### Videos
 [The Catsters][catsters] - more theoretical/mathematical treatment, overview [here](http://simonwillerton.staff.shef.ac.uk/TheCatsters/)  
 [Bartosz Milewski][bartosz_v] - more applied to programming  
+[A Sensible Introduction to Category Theory][sensible_intro] - very simple but thorough introduction to category theory
 
 [catsters]: https://www.youtube.com/playlist?list=PLlGXNwjYhXYxKVa67r0pKuYufECy713bv
 [bartosz_v]: https://www.youtube.com/playlist?list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_
+[sensible_intro]: https://www.youtube.com/watch?v=yAi3XWCBkDo
 
 ### Blogposts
 [Tai-Danae Bradley's blog][math3ma] - nice explanations for why we need different concepts, not that rigorous, nicely illustrated  
@@ -22,13 +24,36 @@
 [bartosz_b]: https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/
 
 ### Notes
-[Category Theory for Programming][ahrens] : Benedikt Ahrens, Kobe Wullaert - duh  
+[Category Theory for Programming][ahrens] - Benedikt Ahrens, Kobe Wullaert - duh  
 
 [ahrens]: https://github.com/benediktahrens/CT4P
 
 ### Books
-[Basic Category Theory][leinster] : Tom Leinster - more fleshed out explanations and more definitions  
+[Basic Category Theory - Tom Leinster][leinster] - more fleshed out explanations and more definitions  
 
 [leinster]: https://arxiv.org/abs/1612.09375
+
+### Articles
+
+
+
+
+## Lean
+### Sites
+[Lean Manual][manual] - Lean manual, including setup tutorial, basic syntax, further resources etc
+[Theorem Proving in Lean 4][theorem_proving] - explains how to use Lean for theorem proving
+[Natural Numbers Game][game] - interactive and very fun "game" for learning and practicing theorem proving in Lean
+
+[manual]: https://leanprover.github.io/lean4/doc/
+[theorem_proving]: https://leanprover.github.io/theorem_proving_in_lean4/title_page.html
+[game]: https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/
+
+### Videos
+
+### Blogposts
+
+### Notes
+
+### Books
 
 ### Articles
