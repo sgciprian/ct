@@ -25,5 +25,5 @@ test-library:
   stage: test
   script:
   - echo "Starting tests now"
-  - lean --run src/*.lean
+  - leanproject build
   - echo "Done"

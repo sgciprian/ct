@@ -1,0 +1,8 @@
+[package]
+name = "test-pipeline"
+version = "0.1"
+lean_version = "leanprover-community/lean:3.50.3"
+path = "src"
+
+[dependencies]
+mathlib = {git = "https://github.com/leanprover-community/mathlib", rev = "a9545e8a564bac7f24637443f52ae955474e4991"}
