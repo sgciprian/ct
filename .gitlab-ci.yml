@@ -1,5 +1,9 @@
 image: "sgciprian/lean"
 
+cache:
+ paths:
+  - _target
+
 stages:
 - test
 
