@@ -1,0 +1,16 @@
+image: "sgciprian/lean"
+
+cache:
+  key: mathlib-cache
+  paths:
+  - _target
+
+stages:
+- test
+
+test-library:
+  stage: test
+  script:
+  - echo "Starting tests now"
+  - leanproject build
+  - echo "Done"
