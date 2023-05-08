@@ -1,7 +1,25 @@
-image: "leanprovercommunity/lean"
+image: "python"
 
 stages:
+- install
 - test
+
+install-lean:
+  stage: install
+  script:
+  - echo "Installing elan"
+  - curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
+  - echo "Done."
+
+install-leanproject:
+  stage: install
+  script:
+  - echo "Installing leanproject"
+  - python3 -m pip install --user pipx
+  - python3 -m pipx ensurepath
+  - source ~/.profile
+  - pipx install mathlibtools
+  - echo "Done."
 
 test-library:
   stage: test
