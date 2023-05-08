@@ -24,11 +24,11 @@ install-leanproject:
   - pipx install mathlibtools
   - source ~/.profile
   - leanproject -h
+  - echo "Starting tests now"
+  - leanproject build
   - echo "Done."
 
 test-library:
   stage: test
   script:
-  - echo "Starting tests now"
-  - leanproject build
   - echo "Done"
