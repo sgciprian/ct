@@ -8,7 +8,7 @@ install-lean:
   stage: install
   script:
   - echo "Installing elan"
-  - curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSfy | sh
+  - curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
   - echo "Done."
 
 install-leanproject:
