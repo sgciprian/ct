@@ -82,6 +82,12 @@ For people who want to make changes to your project, it's helpful to have some d
 
 You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
 
+### Gitlab CI/CD
+
+ Currently there is no docker image for LEAN 4.
+ This means we cannot easily set up the Gitlab Pipeline for it.
+ But, there is an image for LEAN 3, therefore, we have decided to use the older version.
+
 ## Authors and acknowledgment
 Show your appreciation to those who have contributed to the project.
 
