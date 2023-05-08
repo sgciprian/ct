@@ -10,6 +10,9 @@ install-lean:
   - echo "Installing elan"
   - curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
   - echo "Done."
+  - echo "Installing lean3"
+  - elan toolchain install stable
+  - echo "Done.'
 
 install-leanproject:
   stage: install
@@ -19,6 +22,7 @@ install-leanproject:
   - python3 -m pipx ensurepath
   - source ~/.profile
   - pipx install mathlibtools
+    - source ~/.profile
   - echo "Done."
 
 test-library:
