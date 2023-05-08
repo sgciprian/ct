@@ -86,7 +86,7 @@ same proof.
 example (A : set ℝ) (x y : ℝ) (hx : x is_a_max_of A) (hy : y is_a_max_of A) : x = y :=
 begin
   have : x ≤ y, from hy.2 x hx.1,
-  /- have : y ≤ x, from hx.2 y hy.1, -/
+  have : y ≤ x, from hx.2 y hy.1,
   linarith,
 end
 
