@@ -1,34 +1,11 @@
-image: "python"
+image: "sgciprian/lean"
 
 stages:
-- install
 - test
-
-# install-lean:
-#   stage: install
-#   script:
-#   - echo "Installing elan"
-#   - curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
-#   - echo "Done."
-#   - echo "Installing lean3"
-#   - elan toolchain install stable
-#   - echo "Done.'
-
-install-leanproject:
-  stage: install
-  script:
-  - echo "Installing leanproject"
-  - python3 -m pip install --user pipx
-  - python3 -m pipx ensurepath
-  - source ~/.profile
-  - pipx install mathlibtools
-  - source ~/.profile
-  - leanproject -h
-  - echo "Starting tests now"
-  - leanproject build
-  - echo "Done."
 
 test-library:
   stage: test
   script:
+  - echo "Starting tests now"
+  - leanproject build
   - echo "Done"
