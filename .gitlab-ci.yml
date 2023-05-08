@@ -1,7 +1,8 @@
 image: "sgciprian/lean"
 
 cache:
- paths:
+  key: mathlib-cache
+  paths:
   - _target
 
 stages:
