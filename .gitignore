@@ -1,2 +1,4 @@
 _target/
 leanpkg.path
+
+*.olean
