@@ -22,7 +22,8 @@ install-leanproject:
   - python3 -m pipx ensurepath
   - source ~/.profile
   - pipx install mathlibtools
-    - source ~/.profile
+  - source ~/.profile
+  - leanproject -h
   - echo "Done."
 
 test-library:
