@@ -7,6 +7,6 @@ universe u
 class preorder (α : Type u) extends has_le α :=
 (refl  : ∀ (x : α), x ≤ x)
 (trans : ∀ (x y z : α), (x ≤ y ∧ y ≤ z) → x ≤ z)
--- done with category
+-- done with class
 
 end ct
