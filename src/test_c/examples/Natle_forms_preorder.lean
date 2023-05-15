@@ -6,8 +6,10 @@ open ct
 -- show that naturals and ≤
 -- form a preorded set
 -- first show that for naturals ≤ is a preorder
-instance nat_leq_is_preorder : ct.preorder ℕ :=
+instance nat_leq_is_preorder : preorder :=
 {
+  memb := ℕ,
+  le := λ x y, x ≤ y,
   refl :=
     begin
       intro x,
@@ -22,4 +24,4 @@ instance nat_leq_is_preorder : ct.preorder ℕ :=
     end,
 }
 -- then this typechecks so all good.
-def nat_is_pre := Pre ℕ nat_leq_is_preorder
+def nat_is_pre := Pre nat_leq_is_preorder

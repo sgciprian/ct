@@ -2,21 +2,19 @@ import test_c.theory.category
 import test_c.theory.preorder
 open ct
 
--- Pre(X, ≤)
--- category induced by a preordered set (X, ≤)
--- → but as above, X can be represented as a type
--- → proof is the instance of the preorder type class
-instance Pre (X : Type*) (proof : ct.preorder X) : category :=
+-- Pre
+-- category induced by a preordered set X - (memb, le)
+instance Pre (X : ct.preorder) : category :=
 {
-  obj := X,
-  hom := λ (x y : X), x ≤ y,
-  id  := λ (x : X),
+  obj := X.memb,
+  hom := X.le,
+  id  := λ (x : X.memb),
     begin
-      apply proof.refl,
+      apply preorder.refl,
     end,
-  compose := λ {x y z} (g : y ≤ z) (f : x ≤ y),
+  compose := λ {x y z} (g : X.le y z) (f : X.le x y),
     begin
-      apply proof.trans x y z,
+      apply preorder.trans x y z,
       split,
       exact f,
       exact g,
