@@ -1,7 +1,8 @@
-import Category 
+import markus.Category
 
-instance Poset : Category ℕ :=
+instance Poset : Category :=
   {
+    C₀ := ℕ,
     hom := λ (X Y : ℕ), X ≤ Y, 
     id := λ X, le_refl X,
     compose := λ _ _ _ g f, le_trans f g,
@@ -10,26 +11,24 @@ instance Poset : Category ℕ :=
     assoc := begin intros, refl end
   }
 
-variables {X Y : ℕ} (f : Poset.hom X Y) (inverse : Poset.hom Y X)
-
-instance PosetIsomorphism : Isomorphism f :=
+instance PosetIsomorphism {X Y : Poset.C₀} (f : Poset.hom X Y) (inverse : Poset.hom Y X) : Isomorphism f :=
   {
     g := inverse,
     f_g := rfl,
     g_f := rfl
   }
 
-instance PosetSecRectPair : SectionRetractionPair f inverse :=
+instance PosetSecRectPair {X Y : Poset.C₀} (f : Poset.hom X Y) (inverse : Poset.hom Y X) : SectionRetractionPair f inverse :=
   {
     r_s := rfl
   }
 
-instance PosetMonomorphism : Monomorphism f :=
+instance PosetMonomorphism {X Y Z : ℕ} (f : X ≤ Y) : Monomorphism f :=
   {
     mono := sorry
   }
 
-instance PosetEpimorphism : Epimorphism f :=
+instance PosetEpimorphism {X Y : ℕ} (f : Poset.hom X Y) : Epimorphism f :=
   {
     epi := sorry
   }
