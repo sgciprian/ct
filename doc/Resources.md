@@ -29,9 +29,11 @@
 [ahrens]: https://github.com/benediktahrens/CT4P
 
 ### Books
-[Basic Category Theory - Tom Leinster][leinster] - more fleshed out explanations and more definitions  
+[Basic Category Theory][leinster] - Tom Leinster - more fleshed out explanations and more definitions  
+[Categories for the Working Mathematician][maclane] - Saunders Mac Lane - reference textbook
 
 [leinster]: https://arxiv.org/abs/1612.09375
+[maclane]: http://www.mtm.ufsc.br/~ebatista/2016-2/maclanecat.pdf
 
 ### Articles
 
@@ -40,13 +42,19 @@
 
 ## Lean
 ### Sites
-[Lean Manual][manual] - Lean manual, including setup tutorial, basic syntax, further resources etc
-[Theorem Proving in Lean 4][theorem_proving] - explains how to use Lean for theorem proving
-[Natural Numbers Game][game] - interactive and very fun "game" for learning and practicing theorem proving in Lean
+[Lean Manual][manual] - (lean4!) Lean manual, including setup tutorial, basic syntax, further resources etc  
+[Theorem Proving in Lean 4][theorem_proving] - (lean4!) explains how to use Lean for theorem proving  
+[Theorem Proving in Lean 3][theorem_proving_l3] - closest thing to a proper Lean tutorial  
+[Natural Numbers Game][game] - interactive and very fun "game" for learning and practicing theorem proving in Lean  
+[Tactics cheatsheet][cheatsheet]  
+[Formalising Mathematics][form] - basic descriptions of Lean type theory, types of brackets, typeclasses  
 
 [manual]: https://leanprover.github.io/lean4/doc/
 [theorem_proving]: https://leanprover.github.io/theorem_proving_in_lean4/title_page.html
 [game]: https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/
+[theorem_proving_l3]: https://leanprover.github.io/theorem_proving_in_lean/
+[cheatsheet]: https://leanprover-community.github.io//img/lean-tactics.pdf
+[form]: https://www.ma.imperial.ac.uk/%7Ebuzzard/xena/formalising-mathematics-2022/Part_B/structures.html
 
 ### Videos
 
@@ -57,3 +65,6 @@
 ### Books
 
 ### Articles
+[Use and abuse of instance parameters in the Lean mathematical library][baanen] - Anne Baanen - analysis of design patterns for typeclasses in mathlib  
+
+[baanen]: https://arxiv.org/abs/2202.01629
