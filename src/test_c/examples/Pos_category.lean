@@ -16,6 +16,24 @@ instance Pos : category :=
   compose := λ {X Y Z} g f, ⟨g.val ∘ f.val, 
     begin
       intros x₁ x₂ h,
-      
+      simp,
+      have fp := f.property,
+      have gp := g.property,
+      apply gp,
+      apply fp,
+      exact h,
     end⟩,
+  left_id :=
+    begin
+      simp,
+    end,
+  right_id :=
+    begin
+      simp,
+    end,
+  assoc :=
+    begin
+      intros,
+      simp,
+    end,
 }
