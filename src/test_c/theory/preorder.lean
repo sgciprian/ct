@@ -2,13 +2,11 @@
 -- but that has more properties than in CT4P
 namespace ct
 
-class preorder :=
-(memb  : _)
-(le    : Π (l r : memb), Prop)
--- TODO don't know how to parametrize this maybe?
-(infix (name := preorder_le ) `≤`:50 := le)
-(refl  : ∀ (x : memb), x ≤ x)
-(trans : ∀ (x y z : memb), (x ≤ y ∧ y ≤ z) → x ≤ z)
+universe u
+
+class preorder (α : Type u) extends has_le α :=
+(refl  : ∀ (x : α), x ≤ x)
+(trans : ∀ (x y z : α), (x ≤ y ∧ y ≤ z) → x ≤ z)
 -- done with preorder
 
 end ct

@@ -5,6 +5,6 @@ universe u
 
 class poset (α : Type u) extends preorder α :=
 (antisymm  : ∀ (x y : α), x ≤ y ∧ y ≤ x → x = y)
--- done with class
+-- done with poset
 
 end ct
