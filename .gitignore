@@ -2,3 +2,5 @@ _target/
 leanpkg.path
 
 *.olean
+
+.DS_Store

@@ -1,0 +1,74 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf610
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;\f2\fnil\fcharset0 LucidaGrande;
+\f3\fnil\fcharset0 AppleSymbols;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;\red255\green255\blue255;
+\red230\green230\blue230;\red230\green230\blue230;\red255\green255\blue255;\red0\green0\blue233;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\csgray\c0\c0;\cssrgb\c100000\c100000\c100000\c90196;
+\csgray\c92143;\csgray\c92143;\cssrgb\c100000\c100000\c100000\c90196;\cssrgb\c0\c0\c93333;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11440\viewh9940\viewkind0
+\deftab720
+\pard\pardeftab720\sl320\partightenfactor0
+
+\f0\b\fs28 \cf0 Defining Poset category\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \
+
+\b0 \
+	Challenges:\
+- type of objects\
+- type of morphisms\
+
+\b \
+
+\b0 	Objects of the category should be preorders. But if we define preorder as a type class taking the type of the set as a parameter, then how do we express the object type?\
+	We can have 
+\f1 \cb5 obj := poset Type*
+\f0 \cb3 , but then defining morphism as 
+\f1 \cb5 hom := 
+\f2 \uc0\u955 
+\f1  X Y, \{f : X \uc0\u8594  Y // 
+\f3 \uc0\u8704 
+\f1  x y, x \uc0\u8804  y \u8594  f x \u8804  f y\}
+\f0 \cb3  fails, since \'93
+\f1 type expected at X, term has type preorder (Type ?)
+\f0 \'94 (which from what I understand means that X is a term, not a type, so we would have to coerce the type of the poset term out). Not sure how to do that with this version of the code.\
+	So then we have to include the actual type of the poset, not just the proof of it being a poset, within the 
+\f1 \cb5 obj
+\f0 \cb3  type. Having something like a Pi-type for 
+\f1 \cf2 \cb6 \outl0\strokewidth0 obj
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4  implies that all types also have a proof for poset, not true. Sigma-type maybe? Then an object is a pair of its type and the proof of the type being a poset, which could (does!) work. Check out branch {\field{\*\fldinst{HYPERLINK "https://gitlab.ewi.tudelft.nl/bpahrens/ct/-/tree/define-poset-sigma"}}{\fldrslt 
+\f1 \cb5 define-poset-sigma}} for this definition.\
+	Another method of doing this would be embedding the type and the operation inside the type class. Check out branch {\field{\*\fldinst{HYPERLINK "https://gitlab.ewi.tudelft.nl/bpahrens/ct/-/tree/define-poset-bundle"}}{\fldrslt 
+\f1 \cf2 \cb6 \outl0\strokewidth0 def-poset-bundle}} for this definition. This also cleans up the poset category, with 
+\f1 \cf2 \cb6 \outl0\strokewidth0 obj
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4  becoming just 
+\f1 \cf2 \cb6 \outl0\strokewidth0 poset
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4 , and stuff like morphism definition becoming clearer to read (once the coercion from poset to type is added).\
+	However, it still has some problems, mainly the Lean info view not displaying the context properly (
+\f1 \cf2 \cb6 \outl0\strokewidth0 preorder.le
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4   hiding the actual poset in the morphism, although internally it does depend on the poset), but it can still be made to work with identical proofs.\
+	We would ideally want to have the accurate goal context from the \uc0\u931 -definition, with the definition clarity of the bundled definition. If we take a look at the \u931  definition for the morphisms, the problem comes from the 
+\f1 \cf2 \cb6 \outl0\strokewidth0 obj
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4  type simply bundling the type and proof without any other properties.\
+	We can simply create a new type class, 
+\f1 \cf2 \cb6 \outl0\strokewidth0 poset_universe
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4 , which bundles together the type of the poset with the proof of poset. On this new type we can add a coercion to type similarly to the bundle definition, so that 
+\f1 \cf2 \cb6 \outl0\strokewidth0 X : poset
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4  with type 
+\f2 \cf2 \cb6 \outl0\strokewidth0 \uc0\u945 
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4  can be interpreted as just the type 
+\f2 \cf2 \cb6 \outl0\strokewidth0 \uc0\u8593 
+\f1 X
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4  equivalent to 
+\f2 \cf2 \cb6 \outl0\strokewidth0 \uc0\u945 
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4 , and defining a 
+\f1 \cf2 \cb6 \outl0\strokewidth0 has_le
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4  instance so that when we have 
+\f1 \cf2 \cb6 \outl0\strokewidth0 x y : 
+\f2 \uc0\u8593 
+\f1 X
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4 , 
+\f1 \cf2 \cb6 \outl0\strokewidth0 x \uc0\u8804  y
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4  becomes equivalent to 
+\f1 \cf2 \cb6 \outl0\strokewidth0 X.proof.le x y
+\f0 \cf2 \cb3 \outl0\strokewidth0 \strokec4 . See commit {\field{\*\fldinst{HYPERLINK "https://gitlab.ewi.tudelft.nl/bpahrens/ct/-/commit/de457c77f29b8ce41aff226480f2b83091e54a2b"}}{\fldrslt 
+\f1 \cb5 \ul \strokec8 de457c77}} for this version.}
