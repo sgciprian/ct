@@ -23,7 +23,7 @@ instance PosetSecRectPair {X Y : Poset.C₀} (f : Poset.hom X Y) (inverse : Pose
     r_s := rfl
   }
 
-/-
+/- why is this not commented out according to the pipeline
 instance PosetMonomorphism {X Y Z : ℕ} (f : X ≤ Y) : Monomorphism f :=
   {
     mono := sorry
