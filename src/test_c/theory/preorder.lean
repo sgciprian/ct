@@ -3,8 +3,8 @@
 namespace ct
 
 class preorder :=
-(memb  : _)
-(le    : Π (l r : memb), Prop)
+(memb  : Type*)
+(le    : memb → memb → Prop)
 -- TODO don't know how to parametrize this maybe?
 (infix (name := preorder_le ) `≤`:50 := le)
 (refl  : ∀ (x : memb), x ≤ x)

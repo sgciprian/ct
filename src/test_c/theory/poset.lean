@@ -6,4 +6,9 @@ class poset extends preorder :=
 (antisymm  : ∀ (x y : memb), x ≤ y ∧ y ≤ x → x = y)
 -- done with poset
 
+instance coe_poset : has_coe_to_sort poset Type* :=
+{
+  coe := λ p, p.memb
+}
+
 end ct
