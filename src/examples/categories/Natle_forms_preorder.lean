@@ -1,5 +1,5 @@
 import test_c.theory.preorder
-import examples.PreXle_category
+import examples.categories.PreXle_category
 open ct
 
 -- show that naturals and ≤
