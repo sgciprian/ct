@@ -16,7 +16,7 @@ structure category :=
 
 --notation
 infixr `⟶`:90 := category.hom
-infix (name := category_compose) `∘`:90 := category.compose
+--infix (name := category_compose) `∘`:90 := category.compose
 notation `𝟙` := category.id
 
 end category_theory
