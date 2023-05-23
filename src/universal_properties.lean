@@ -2,16 +2,16 @@ import .category
 
 namespace category_theory
 
-def is_initial [C : category] (X : C.C₀) : Prop :=
-  ∀ (Y : C.C₀), ∃ (f g : C.hom X Y), f = g
+def isInitial (C : category) (A : C.C₀) : Prop :=
+  ∀ (B : C.C₀), ∃ (f g : C.hom A B), f = g
 
-structure initiality [C : category] (X : C.C₀) :=
-  (initial : ∀ (Y : C.C₀), ∃ (f g : C.hom X Y), f = g)
+structure initialObject (C : category) (A : C.C₀) :=
+  (property : isInitial C A)
 
-def is_terminal [C : category] (Y : C.C₀) : Prop :=
-  ∀ (X : C.C₀), ∃ (f g : C.hom X Y), f = g
+def isTerminal (C : category) (B : C.C₀) : Prop :=
+  ∀ (A : C.C₀), ∃ (f g : C.hom A B), f = g
 
-structure terminality [C : category] (Y : C.C₀) :=
-  (terminal : ∀ (X : C.C₀), ∃ (f g : C.hom X Y), f = g)
-
+structure terminalObject (C : category) (B : C.C₀) :=
+  (property : isTerminal C B)
+  
 end category_theory
