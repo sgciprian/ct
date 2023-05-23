@@ -13,5 +13,34 @@ def isTerminal (C : category) (B : C.C₀) : Prop :=
 
 structure terminalObject (C : category) (B : C.C₀) :=
   (property : isTerminal C B)
+
+
+structure binaryProduct [C : category] (A B : C.C₀) :=
+  -- product of A and B
+  (P : C.C₀)
+  (π₁ : C.hom P A)
+  (π₂ : C.hom P B)
+
+  -- map
+  (f : ∀ {Q : C.C₀}, C.hom Q P)
+  
+  -- axioms
+  (commutes_left : ∀ {Q : C.C₀} (q₁ : C.hom Q A), C.compose π₁ f = q₁)
+  (commutes_right : ∀ {Q : C.C₀} (q₂ : C.hom Q B), C.compose π₂ f = q₂)
+  (uniqueness : ∀ {Q : C.C₀}  (q₁ : C.hom Q A) (q₂ : C.hom Q B) (g : C.hom Q P), C.compose π₁ g = q₁ → C.compose π₂ g = q₂ → g = f)
+
+structure binaryCoproduct [C : category] (A B : C.C₀) :=
+  -- coproduct of A and B
+  (Cp : C.C₀)
+  (l₁ : C.hom A Cp)
+  (l₂ : C.hom B Cp)
+
+  -- map
+  (f : ∀ {D : C.C₀}, C.hom Cp D)
+  
+  -- axioms
+  (commutes_left : ∀ {D : C.C₀} (i₁ : C.hom A D), C.compose f l₁ = i₁)
+  (commutes_right : ∀ {D : C.C₀} (i₂ : C.hom B D), C.compose f l₂ = i₂)
+  (uniqueness : ∀ {D : C.C₀} (i₁ : C.hom A D) (i₂ : C.hom B D) (g : C.hom Cp D), C.compose g l₁ = i₁ → C.compose g l₂ = i₂ → g = f)
   
 end category_theory
