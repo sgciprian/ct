@@ -2,7 +2,6 @@ universes u v
 
 namespace category_theory
 
--- set_option pp.all true
 structure category :=
   --attributes
   (C₀     : Sort u)
