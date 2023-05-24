@@ -16,4 +16,42 @@ class full {C D : category} {F: functor C D} :=
 class faithful {C D : category} {F: functor C D} :=
   (faithful : ∀ {X Y : C} {f g : C.hom X Y} (h : functor_map F f = functor_map F g), f = g)
 
+def identity_functor (C : category) : functor C C :=
+{
+  map_obj := λ X : C, X,
+  map_hom := λ X Y : C, λ f, f,
+  id :=
+    begin
+      intro X,
+      refl,
+    end,
+  comp :=
+    begin
+      intros,
+      refl,
+    end,
+}
+
+notation (name := identity_functor) `𝟙` := identity_functor
+
+def composition_functor {C D E : category} (G : functor D E) (F : functor C D) : functor C E :=
+{
+  map_obj := λ X : C, G.map_obj (F.map_obj X),
+  map_hom := λ X Y : C, λ f, G.map_hom (F.map_hom f),
+  id :=
+    begin
+      intro,
+      rw F.id,
+      rw G.id,
+    end,
+  comp :=
+    begin
+      intros,
+      rw F.comp,
+      rw G.comp,
+    end,
+}
+
+infixr `⬝`:90 := composition_functor
+
 end category_theory

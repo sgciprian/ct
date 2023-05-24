@@ -19,8 +19,8 @@ instance coe_category : has_coe_to_sort category (Sort u) :=
 }
 
 --notation
-infixr `⟶`:90 := category.hom
+--infixr `⟶`:90 := category.hom
 --infix (name := category_compose) `∘`:90 := category.compose
-notation `𝟙` := category.id
+notation (name := category_identity) `𝟙` := category.id
 
 end category_theory
