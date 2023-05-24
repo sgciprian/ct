@@ -10,10 +10,10 @@ structure functor (C D : category) :=
 
 def functor_map {C D : category} (F: functor C D) {X Y : C} (f : C.hom X Y) :  D.hom (F.map_obj X) (F.map_obj Y) := F.map_hom f
 
-class full {C D : category} {F: functor C D} :=
-  (full : ∀ {X Y : C} (g : D.hom (F.map_obj X) (F.map_obj Y)), ∃ (f : C.hom X Y), (F.map_hom f) = g)
+def is_full {C D : category} (F: functor C D) :=
+  ∀ {X Y : C} (g : D.hom (F.map_obj X) (F.map_obj Y)), ∃ (f : C.hom X Y), (F.map_hom f) = g
 
-class faithful {C D : category} {F: functor C D} :=
-  (faithful : ∀ {X Y : C} {f g : C.hom X Y} (h : functor_map F f = functor_map F g), f = g)
+def is_faithful {C D : category} (F: functor C D) :=
+  ∀ {X Y : C} {f g : C.hom X Y} (h : functor_map F f = functor_map F g), f = g
 
 end category_theory
