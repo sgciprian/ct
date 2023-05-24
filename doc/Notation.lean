@@ -1,0 +1,23 @@
+-- Type \0<tab> to get ₀
+--      \1             ₁
+--      etc.
+--
+--      \alpha         α
+--      \beta          β
+--      etc.
+--
+--      \lambda        λ
+--      \imp           →
+--      \comp          ∘
+--
+--      \Pi            Π
+--      \Sigma         Σ
+--
+--      \forall        ∀
+--      \exists        ∃
+--      \wedge         ∧
+--
+--      \b1            𝟙
+--      \le            ≤
+--      \<             ⟩
+--      \>             ⟩ 
