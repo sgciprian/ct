@@ -44,7 +44,7 @@ You can also document commands to lint the code or run tests. These steps help t
 - Students:
   - Ciprian Stanciu
   - Csanád Farkas
-  - Markus
+  - Markus Orav
   - Pedro Brandão Brandao de Araujo
   - Rado Todorov
 - Supervisors:
