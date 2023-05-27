@@ -12,7 +12,7 @@ def MonoidCategory [b : Type*] [subsingleton b] [C : category] (M : monoid C) : 
   {
     C₀ := b,
     hom := λ _ _, C.C₀,
-    compose := λ _ _ _ f g, M.m f g,
+    compose := λ _ _ _ f g, f ⊗ g,
     id := λ _, M.e,
     left_id :=
     begin
