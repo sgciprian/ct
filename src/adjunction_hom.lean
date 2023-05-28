@@ -1,11 +1,10 @@
 import .category
 import .functors
-import .natural_transformation
 
 namespace category_theory
 
 -- Definition 2.1 https://ncatlab.org/nlab/show/adjoint+functor
--- in terms of natural bijections of hom-sets.
+-- in terms of natural bijections of hom-sets. (Mac Lane pg. 80)
 
 -- L and R are the left adjoint and right adjoint functors, respectively.
 -- Note that functor_map morphs a morphism via a functor,
