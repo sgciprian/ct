@@ -26,19 +26,17 @@ structure binaryProduct (C : category) (A B : C.C₀) :=
   (π₂ : C.hom P B)
 
   (universal_property : isBinaryProduct C P π₁ π₂)
-  
+
+def isBinaryCoproduct (C : category) {A B : C.C₀} (Cₚ : C.C₀) (ι₁ : C.hom A Cₚ) (ι₂ : C.hom B Cₚ) : Prop :=
+                        ∀ (D : C.C₀) (i₁ : C.hom A D) (i₂ : C.hom B D),
+                          ∃! (f : C.hom Cₚ D), C.compose f ι₁ = i₁ ∧ C.compose f ι₂ = i₂
+ 
 structure binaryCoproduct (C : category) (A B : C.C₀) :=
   -- coproduct of A and B
-  (Cp : C.C₀)
-  (l₁ : C.hom A Cp)
-  (l₂ : C.hom B Cp)
+  (Cₚ : C.C₀)
+  (ι₁ : C.hom A Cₚ)
+  (ι₂ : C.hom B Cₚ)
 
-  -- map
-  (f : ∀ {D : C.C₀}, C.hom Cp D)
-  
-  -- axioms
-  (commutes_left : ∀ {D : C.C₀} (i₁ : C.hom A D), C.compose f l₁ = i₁)
-  (commutes_right : ∀ {D : C.C₀} (i₂ : C.hom B D), C.compose f l₂ = i₂)
-  (uniqueness : ∀ {D : C.C₀} (i₁ : C.hom A D) (i₂ : C.hom B D) (g : C.hom Cp D), C.compose g l₁ = i₁ → C.compose g l₂ = i₂ → g = f)
-  
+  (universal_property : isBinaryCoproduct C Cₚ ι₁ ι₂)
+
 end category_theory

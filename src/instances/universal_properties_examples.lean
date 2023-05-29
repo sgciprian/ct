@@ -68,10 +68,59 @@ begin
   },
 end
 
-
-
-
-
-
+lemma binary_coproduct_universal_property (A B : Set.C₀) : isBinaryCoproduct Set (A ⊕ B) sum.inl sum.inr :=
+begin
+  intros D i₁ i₂,
+  let f : (A ⊕ B) → D := λ x, sum.cases_on x i₁ i₂,
+  have map_inl : ∀ (x : A), f (sum.inl x) = i₁ x,
+  {
+    intro x,
+    simp [f],
+  },
+  have map_inr : ∀ (x : B), f (sum.inr x) = i₂ x,
+  {
+    intro x,
+    simp [f],
+  },
+  existsi f,
+  split,
+  {
+    split,
+    {
+      apply funext,
+      intro x,
+      exact (map_inl x),
+    },
+    {
+      apply funext,
+      intro x,
+      exact (map_inr x),
+    },
+  },
+  {
+    intros g H,
+    apply funext,
+    intro x,
+    cases x,
+    {
+      have H₁' : (λ (p : A ⊕ B), g p) (sum.inl x) = i₁ x,
+      {
+        rw ←H.1,
+        refl,
+      },
+      change (g (sum.inl x)) with ((λ (p : A ⊕ B), g p) (sum.inl x)),
+      rw H₁',
+    },
+    {
+      have H₂' : (λ (p : A ⊕ B), g p) (sum.inr x) = i₂ x,
+      {
+        rw ←H.2,
+        refl,
+      },
+      change (g (sum.inr x)) with ((λ (p : A ⊕ B), g p) (sum.inr x)),
+      rw H₂',
+    },
+  },
+end
 
 end category_theory
