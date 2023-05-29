@@ -15,21 +15,19 @@ structure terminalObject (C : category) (B : C.C₀) :=
   (property : isTerminal C B)
 
 
-structure binaryProduct [C : category] (A B : C.C₀) :=
+def isBinaryProduct (C : category) {A B : C.C₀} (P : C.C₀) (π₁ : C.hom P A) (π₂ : C.hom P B) : Prop :=
+                        ∀ (Q : C.C₀) (q₁ : C.hom Q A) (q₂ : C.hom Q B),
+                          ∃! (f : C.hom Q P), C.compose π₁ f = q₁ ∧ C.compose π₂ f = q₂
+
+structure binaryProduct (C : category) (A B : C.C₀) :=
   -- product of A and B
   (P : C.C₀)
   (π₁ : C.hom P A)
   (π₂ : C.hom P B)
 
-  -- map
-  (f : ∀ {Q : C.C₀}, C.hom Q P)
+  (universal_property : isBinaryProduct C P π₁ π₂)
   
-  -- axioms
-  (commutes_left : ∀ {Q : C.C₀} (q₁ : C.hom Q A), C.compose π₁ f = q₁)
-  (commutes_right : ∀ {Q : C.C₀} (q₂ : C.hom Q B), C.compose π₂ f = q₂)
-  (uniqueness : ∀ {Q : C.C₀}  (q₁ : C.hom Q A) (q₂ : C.hom Q B) (g : C.hom Q P), C.compose π₁ g = q₁ → C.compose π₂ g = q₂ → g = f)
-
-structure binaryCoproduct [C : category] (A B : C.C₀) :=
+structure binaryCoproduct (C : category) (A B : C.C₀) :=
   -- coproduct of A and B
   (Cp : C.C₀)
   (l₁ : C.hom A Cp)
