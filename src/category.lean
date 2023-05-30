@@ -2,7 +2,6 @@ universes u v
 
 namespace category_theory
 
--- set_option pp.all true
 structure category :=
   --attributes
   (C₀     : Sort u)
@@ -14,9 +13,14 @@ structure category :=
   (right_id : ∀ {X Y : C₀} (f : hom X Y), compose (id Y) f = f)
   (assoc    : ∀ {X Y Z W : C₀} (f : hom X Y) (g : hom Y Z) (h : hom Z W), compose h (compose g f) = compose (compose h g) f)
 
+instance coe_category : has_coe_to_sort category (Sort u) :=
+{
+  coe := λ c, c.C₀
+}
+
 --notation
-infixr `⟶`:90 := category.hom
+--infixr `⟶`:90 := category.hom
 --infix (name := category_compose) `∘`:90 := category.compose
-notation `𝟙` := category.id
+notation (name := category_identity) `𝟙` := category.id
 
 end category_theory
