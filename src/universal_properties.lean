@@ -10,6 +10,7 @@ def isInitial (C : category) (A : C.C₀) : Prop :=
 structure initialObject (C : category) (A : C.C₀) :=
   (property : isInitial C A)
 
+
 -- Given a category C:
 -- Object B ∈ C₀ is terminal if there is a unique morphism from every object A ∈ C₀ to B
 def isTerminal (C : category) (B : C.C₀) : Prop :=
@@ -17,6 +18,7 @@ def isTerminal (C : category) (B : C.C₀) : Prop :=
 
 structure terminalObject (C : category) (B : C.C₀) :=
   (property : isTerminal C B)
+
 
 -- Given category C and objects A, B ∈ C₀:
 -- A triple (P, π₁: P ⟶ A, π₂: P ⟶ B) is called a product of A and B if
@@ -31,6 +33,7 @@ structure binaryProduct (C : category) (A B : C.C₀) :=
   (π₁ : C.hom P A)
   (π₂ : C.hom P B)
   (property : isBinaryProduct C P π₁ π₂)
+
 
 -- Given category C and objects A, B ∈ C₀:
 -- A triple (Cₚ, ι₁: A ⟶ Cₚ, ι₂: B ⟶ Cₚ) is called a coproduct of A and B if
