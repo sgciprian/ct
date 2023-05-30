@@ -9,7 +9,7 @@ open category_theory
 def poset_to_set : functor Pos Set :=
 {
   map_obj := λ x, x.memb,
-  map_hom := sorry, -- begin intros, trivial end,
-  id := sorry,
-  comp := sorry,
+  map_hom := λ x y f, f.val,
+  id := begin intros, trivial, end,
+  comp := begin intros, trivial, end,
 }
