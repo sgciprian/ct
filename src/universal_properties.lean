@@ -7,8 +7,9 @@ namespace category_theory
 def isInitial (C : category) (A : C.C₀) : Prop :=
   ∀ (B : C.C₀) (f g : C.hom A B), f = g
 
-structure initialObject (C : category) (A : C.C₀) :=
-  (property : isInitial C A)
+structure initialObject (C : category) := 
+  (object : C.C₀)
+  (property : isInitial C object)
 
 
 -- Given a category C:
@@ -16,8 +17,9 @@ structure initialObject (C : category) (A : C.C₀) :=
 def isTerminal (C : category) (B : C.C₀) : Prop :=
   ∀ (A : C.C₀) (f g : C.hom A B), f = g
 
-structure terminalObject (C : category) (B : C.C₀) :=
-  (property : isTerminal C B)
+structure terminalObject (C : category) :=
+  (object : C.C₀)
+  (property : isTerminal C object)
 
 
 -- Given category C and objects A, B ∈ C₀:

@@ -12,7 +12,7 @@ begin
 end
 
 -- The singleton set is a terminal object in the Set category
-lemma singleton_terminal_in_Set (b : Set.C₀) (h : subsingleton b) : isTerminal Set b :=
+lemma singleton_terminal_in_Set (B : Set.C₀) (h : subsingleton B) : isTerminal Set B :=
 begin
   intros A f g,
   funext x,
@@ -51,7 +51,7 @@ begin
   -- Prove the first subgoal
   {
     split,
-    
+
     -- Prove that the diagram commutes to the left
     -- That is, applying the projection function π₁ to f results in q₁
     {
