@@ -1,5 +1,5 @@
-import .category
-import .functors
+import category
+import functors
 
 namespace category_theory
 
@@ -14,7 +14,7 @@ namespace category_theory
 
 -- The naturality conditions are defined for all pairs ⟨c, d⟩ of objects and
 -- arbitrary morphism dₕ in 𝒟(L c, d).
-structure adjunction {C D : category} (L : functor C D) (R : functor D C) :=
+structure adjunction_hom {C D : category} (L : functor C D) (R : functor D C) :=
 (φ : Π {c : C} {d : D}, (D.hom (L c) d) → (C.hom c (R d)))
 
 -- Homset mapping should be isomorphic.

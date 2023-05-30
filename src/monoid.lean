@@ -10,5 +10,7 @@ class monoid (C : category) :=
   (left_id : ∀ (X : C.C₀), m X e = X)
   (right_id : ∀ (X : C.C₀), m e X = X)
 
+-- notation for the monoidal operation
+infixr `⊗`:23 := monoid.m
 
 end category_theory

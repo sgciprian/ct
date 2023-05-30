@@ -1,5 +1,5 @@
-import .category
-import .functors
+import category
+import functors
 
 namespace category_theory 
 
