@@ -11,7 +11,7 @@ def is_epic [C : category] {X Y Z : C} (f : C.hom X Y) :=
 def is_iso [C : category] {X Y : C} (f : C.hom X Y) :=
   ∃ (g : C.hom Y X),((C.compose g f) = (C.id X)) ∧ ((C.compose f g) = (C.id Y))
 
-def sectionRetractionPair [C : category] {X Y : C} (s : C.hom X Y) (r : C.hom Y X) :=
+def section_retraction_pair [C : category] {X Y : C} (s : C.hom X Y) (r : C.hom Y X) :=
   C.compose r s = C.id X
 
 end category_theory

@@ -4,7 +4,7 @@ import .Set_category
 namespace category_theory
 
 -- The empty set is an initial object in the Set category
-lemma empty_set_initial_in_Set : isInitial Set empty :=
+lemma empty_set_initial_in_Set : is_initial Set empty :=
 begin
   intros B f g,
   funext x,
@@ -12,7 +12,7 @@ begin
 end
 
 -- The singleton set is a terminal object in the Set category
-lemma singleton_terminal_in_Set (B : Set.C₀) (h : subsingleton B) : isTerminal Set B :=
+lemma singleton_terminal_in_Set (B : Set.C₀) (h : subsingleton B) : is_terminal Set B :=
 begin
   intros A f g,
   funext x,
@@ -20,7 +20,7 @@ begin
 end
 
 -- The cartesian product A × B along with its projection functions forms a binary product in the Set category
-lemma binary_product_in_Set (A B : Set.C₀) : isBinaryProduct Set (A × B) (λ p, p.1) (λ p, p.2) :=
+lemma binary_product_in_Set (A B : Set.C₀) : is_binary_product Set (A × B) (λ p, p.1) (λ p, p.2) :=
 begin
   intros Q q₁ q₂,
 
@@ -98,7 +98,7 @@ begin
 end
 
 -- The disjoint union A ⊕ B along with its inclusions maps forms a binary coproduct in the Set category
-lemma binary_coproduct_in_Set (A B : Set.C₀) : isBinaryCoproduct Set (A ⊕ B) sum.inl sum.inr :=
+lemma binary_coproduct_in_Set (A B : Set.C₀) : is_binary_coproduct Set (A ⊕ B) sum.inl sum.inr :=
 begin
   intros D i₁ i₂,
 
