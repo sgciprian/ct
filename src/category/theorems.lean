@@ -25,4 +25,17 @@ namespace category_theory
       rw C.assoc,
     end
 
+  theorem extend
+    {C : category}
+    {X Y Z : C.C₀}
+    {f g : C.hom X Y}
+    (h : C.hom Y Z)
+    :
+    f = g → C.compose h f = C.compose h g
+    :=
+    begin
+      intros a,
+      rw a,
+    end
+
 end category_theory
