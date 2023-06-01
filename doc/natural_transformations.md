@@ -8,6 +8,17 @@
 
 Two options to write the $\alpha$ part needed to be a natural transformation.
 
+
+\[\begin{tikzcd}
+	&&& {G \cdot F' (X)} \\
+	{G \cdot F (X)} &&&&&& {G' \cdot F' (X)} \\
+	&&& {G' \cdot F (X)}
+	\arrow["{G(\alpha_X)}"{description}, from=2-1, to=1-4]
+	\arrow["{\beta_{F(X)}}"{description}, from=2-1, to=3-4]
+	\arrow["{G'(\alpha_X)}"{description}, from=3-4, to=2-7]
+	\arrow["{\beta_{F'(X)}}"{description}, from=1-4, to=2-7]
+\end{tikzcd}\]
+
 <iframe class="quiver-embed" src="https://q.uiver.app/#q=WzAsNCxbMywwLCJHIFxcY2RvdCBGJyAoWCkiXSxbMCwxLCJHIFxcY2RvdCBGIChYKSJdLFs2LDEsIkcnIFxcY2RvdCBGJyAoWCkiXSxbMywyLCJHJyBcXGNkb3QgRiAoWCkiXSxbMSwwLCJHKFxcYWxwaGFfWCkiLDFdLFsxLDMsIlxcYmV0YV97RihYKX0iLDFdLFszLDIsIkcnKFxcYWxwaGFfWCkiLDFdLFswLDIsIlxcYmV0YV97RicoWCl9IiwxXV0=&embed" width="1096" height="432" style="border-radius: 8px; border: none;"></iframe>
 
 The top one was chosen out of convenience.
