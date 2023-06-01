@@ -10,6 +10,7 @@ Two options to write the $\alpha$ part needed to be a natural transformation.
 
 
 $$
+\usepackage{tikz-cd}
 \begin{tikzcd}
 	&&& {G \cdot F' (X)} \\
 	{G \cdot F (X)} &&&&&& {G' \cdot F' (X)} \\
