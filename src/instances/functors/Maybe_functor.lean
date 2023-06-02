@@ -7,7 +7,9 @@ inductive Maybe (α : Type)
   | none : Maybe
   | some : α → Maybe
 
-def MaybeF : functor Set Set :=
+-- Example of the Maybe functor 
+-- as known from Functional Programming Languages
+def MaybeFunctor : functor Set Set :=
 {
   map_obj := λ A, Maybe A,
   map_hom :=

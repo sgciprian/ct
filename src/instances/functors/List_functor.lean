@@ -7,7 +7,10 @@ inductive List (α: Type) : Type
   | nil : List
   | cons (head: α) (tail: List) : List
 
-def ListF : functor Set Set :=
+
+-- Example of the List functor 
+-- as known from Functional Programming Languages
+def ListFunctor : functor Set Set :=
 {
   map_obj := λ A, List A,
   map_hom :=
