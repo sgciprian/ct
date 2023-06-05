@@ -167,11 +167,11 @@ lemma product_of_composible_morphisms {C : category} {c c' d d' e e' : C}
     -- Now bringing these two together, we can prove that g ∘ f ∘ πc = πe (f×f')∘(g×g') (q₁)
     -- and g'∘ f'∘ πc'= πe'(f×f')∘(g×g') (q₂).
     have q₁ : C.compose g (C.compose f cp.p₁) = C.compose ep.p₁ (C.compose (pm dp ep g g') (pm cp dp f f')),
-    rw h₁.left,
-    rw C.assoc,
-    rw h₂.left,
-    symmetry,
-    apply C.assoc,
+    rw h₁.left,    -- g ∘ πd ∘ (f×f') = πe (f×f')∘(g×g') via h₁
+    rw C.assoc,    -- rewrite to (g ∘ πd) ∘ (f×f') = πe (f×f')∘(g×g') via associativity
+    rw h₂.left,    -- (πe ∘ (g×g')) ∘ (f×f') = πe (f×f')∘(g×g') via h₂
+    symmetry,      -- rewrite to πe (f×f')∘(g×g') = (πe ∘ (g×g')) ∘ (f×f') so it fits
+    apply C.assoc, -- with the associativity rule for morphism composition and we're done.
     have q₂ : C.compose g' (C.compose f' cp.p₂) = C.compose ep.p₂ (C.compose (pm dp ep g g') (pm cp dp f f')),
     rw h₁.right,
     rw C.assoc,
