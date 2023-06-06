@@ -25,12 +25,12 @@ def product_morphism {C : category} {c d i j : C} {cxi : binary_product c i} {dx
 -- Short-hand for the f×g.
 def pm {C : category} {c d i j : C} (cxi : binary_product c i) (dxj : binary_product d j)
 (f : C.hom c d) (g : C.hom i j) : C.hom cxi.p dxj.p := @product_morphism C c d i j cxi dxj f g
+
 --       c ←   c×i   → i
 --              |
 --     f ↓  f×g |    ↓ g   commutes
 --              ↓
 --       d ←   d×j   → j
-
 lemma product_morphism_commutes {C : category} {c d i j : C}
 (cxi : binary_product c i) (dxj : binary_product d j) (f : C.hom c d) (g : C.hom i j)
 : C.compose f cxi.p₁ = C.compose dxj.p₁ (product_morphism f g) 
@@ -134,6 +134,15 @@ lemma product_of_composible_morphisms {C : category} {c c' d d' e e' : C}
     rw ← q₂,
     rw C.assoc,
     refl,
+  end
+
+-- help lean some more
+@[simp]
+lemma simp_product_morphism {C : category} {c c' d d' : C} {cp : binary_product c c'} {dp : binary_product d d'}
+{f f' : C.hom c d} {g g' : C.hom c' d'}
+: f = f' ∧ g = g' → @product_morphism C c d c' d' cp dp f g = product_morphism f' g' :=
+  begin
+    cc,
   end
 
 end category_theory

@@ -18,6 +18,11 @@ instance coe_category : has_coe_to_sort category (Sort u) :=
   coe := λ c, c.C₀
 }
 
+lemma simp_comp_left {C : category} {X Y Z : C} {f₁ f₂ : C.hom Y Z} {g : C.hom X Y} : f₁ = f₂ → C.compose f₁ g = C.compose f₂ g :=
+  begin
+    cc,
+  end
+
 --notation
 --infixr `⟶`:90 := category.hom
 --infix (name := category_compose) `∘`:90 := category.compose
