@@ -11,7 +11,7 @@ structure natural_transformation {C D : category} (F G : functor C D) :=
   )
 
   -- notation
-  infixr `==>`:90 := natural_transformation
+  infixr `==>`:75 := natural_transformation
 
   def bimap {C D E : category} {F F' : C => D} {G G' : D => E} (β : G ==> G') (α : F ==> F')
     : (G ⬝ F) ==> (G' ⬝ F') :=
@@ -84,5 +84,16 @@ structure natural_transformation {C D : category} (F G : functor C D) :=
       end,
     }
 
+  infixr (name := nt_composition) `⊚`:90 := nt_composition
+
+  def ID {C D : category} (F : C => D) : F ==> F :=
+    {
+      α := λ X, D.id (F.map_obj X),
+      naturality_condition := begin
+        intros,
+        rw D.left_id,
+        rw D.right_id,
+      end,
+    }
 
 end category_theory
