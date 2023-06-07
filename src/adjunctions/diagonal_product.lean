@@ -126,6 +126,50 @@ def diagonal_product_adjoint (C : category) [has_all_products C]
       exact t₂,
       exact t₃,
     end,
+  retr :=
+  -- φr is isomorphic
+  -- Deconstruct h as its left and right C-category morphisms
+  -- then should be similar (but simpler) to proving section.
+    begin
+      intros c d h,
+      simp,
+      unfold pm,
+      let ca := h.fst,
+      let cb := h.snd,
+      have q : (ca, cb) = h, simp,
+      rw ← q,
+
+      -- Showing left and right side are equal to ca and cb is identical to section. (t₂ and t₃ proofs)
+      -- copy-pasted from there
+      have q₁ := product_morphism_commutes (po c c) (po d.fst d.snd) ca cb, -- commuting diagram for (πa∘h)×(πb∘h)
+      have q₂ := (po c c).ump (id_bundle c), -- by ump, (po c c).p₁ ∘ (unique morph from c to c×c) = id
+      -- Proving πa side:
+      have t₁ : C.compose (po d.fst d.snd).p₁ (C.compose (product_morphism ca cb) ((po c c).ue (id_bundle c))) = ca,
+      rw C.assoc,   -- make it clear to lean that we intend to apply q₁
+      rw ← q₁.left,
+      rw ← C.assoc, -- help lean some more to replace the (po c c) stuff with just id
+      rw ← q₂.left,
+      simp,
+      apply C.left_id, -- done!
+      -- Now also for πb side, identical
+      have t₂ : C.compose (po d.fst d.snd).p₂ (C.compose (product_morphism ca cb) ((po c c).ue (id_bundle c))) = cb,
+      rw C.assoc,   -- make it clear to lean that we intend to apply q₁
+      rw ← q₁.right,
+      rw ← C.assoc, -- help lean some more to replace the (po c c) stuff with just id
+      rw ← q₂.right,
+      simp,
+      apply C.left_id, -- done!
+      -- end copy-paste
+
+      rw t₁,
+      rw t₂,
+    end,
+  naturality_c :=
+    begin
+      intros,
+      simp,
+      unfold pm,
+    end,
 }
 
 end category_theory
