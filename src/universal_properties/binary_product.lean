@@ -43,4 +43,24 @@ class has_all_products (C : category) :=
 -- Short-hand for the c×d.
 def po {C : category} [has_all_products C] (c d : C) := has_all_products.product c d
 
+-- Short-hand for the unique morphism going from c to a×b via f and g.
+def ps {C : category} [has_all_products C] {c a b : C} (f : C.hom c a) (g : C.hom c b) := (po a b).ue {x := c, x₁ := f, x₂ := g}
+
+-- Some useful simplification rules.
+lemma simp_ps_left {C : category} [has_all_products C] {c a b : C} (f : C.hom c a) (g : C.hom c b)
+: f = C.compose (po a b).p₁ (ps f g) :=
+  begin
+    unfold ps,
+    have q := (po a b).ump {x := c, x₁ := f, x₂ := g},
+    rw ← q.left,
+  end
+
+lemma simp_ps_right {C : category} [has_all_products C] {c a b : C} (f : C.hom c a) (g : C.hom c b)
+: g = C.compose (po a b).p₂ (ps f g) :=
+  begin
+    unfold ps,
+    have q := (po a b).ump {x := c, x₁ := f, x₂ := g},
+    rw ← q.right,
+  end
+
 end category_theory
