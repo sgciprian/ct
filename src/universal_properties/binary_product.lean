@@ -44,23 +44,49 @@ class has_all_products (C : category) :=
 def po {C : category} [has_all_products C] (c d : C) := has_all_products.product c d
 
 -- Short-hand for the unique morphism going from c to a×b via f and g.
+-- c → a×b, f g
 def ps {C : category} [has_all_products C] {c a b : C} (f : C.hom c a) (g : C.hom c b) := (po a b).ue {x := c, x₁ := f, x₂ := g}
 
 -- Some useful simplification rules.
+-- f = πa ∘ (c → a×b, f g), where πa is the projection from a×b to a
 lemma simp_ps_left {C : category} [has_all_products C] {c a b : C} (f : C.hom c a) (g : C.hom c b)
 : f = C.compose (po a b).p₁ (ps f g) :=
   begin
+    -- Just use the universal mapping property of a×b.
     unfold ps,
     have q := (po a b).ump {x := c, x₁ := f, x₂ := g},
     rw ← q.left,
   end
 
+-- g = πb ∘ (c → a×b, f g)
 lemma simp_ps_right {C : category} [has_all_products C] {c a b : C} (f : C.hom c a) (g : C.hom c b)
 : g = C.compose (po a b).p₂ (ps f g) :=
   begin
+    -- Identical to simp_ps_left
     unfold ps,
     have q := (po a b).ump {x := c, x₁ := f, x₂ := g},
     rw ← q.right,
+  end
+
+-- Composition can go inside the ps.
+-- (c → a×b, f g) ∘ h = (c' → a×b, f∘h g∘h)
+lemma refl_ps_compose {C : category} [has_all_products C] {c' c a b : C} (h : C.hom c' c) (f : C.hom c a) (g : C.hom c b)
+: C.compose (ps f g) h = ps (C.compose f h) (C.compose g h) :=
+  begin
+    -- Here, since (c → a×b, fg) ∘ h is an arrow from c' to a×b, if we show that
+    -- it maps c' to a via f∘h and c' to b via g∘h then it must be identical to (c' → a×b, f∘h g∘h).
+    have q := (po a b).uu {x := c', x₁ := C.compose f h, x₂ := C.compose g h} (C.compose (ps f g) h),
+    simp at q,
+    apply q,
+    split,
+    -- Now showing f∘h = πa ∘ (c → a×b, fg) ∘ h.
+    rw C.assoc,
+    apply simp_comp_left,
+    apply simp_ps_left,
+    -- The πb side.
+    rw C.assoc,
+    apply simp_comp_left,
+    apply simp_ps_right,
   end
 
 end category_theory
