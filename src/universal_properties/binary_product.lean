@@ -68,6 +68,25 @@ lemma simp_ps_right {C : category} [has_all_products C] {c a b : C} (f : C.hom c
     rw ← q.right,
   end
 
+-- If we have a ps with the two projection arrows, then that's just identity
+lemma simp_ps_id {C : category} [has_all_products C] {a b : C} : ps (po a b).p₁ (po a b).p₂ = C.id (po a b).p :=
+  begin
+    -- Since both identity and the ps are morphs from a×b to a×b via πa and πb
+    have q := (po a b).uu {x := (po a b).p, x₁ := (po a b).p₁, x₂ := (po a b).p₂} (C.id (po a b).p),
+    simp at q,
+    have r := (po a b).uu {x := (po a b).p, x₁ := (po a b).p₁, x₂ := (po a b).p₂} (ps (po a b).p₁ (po a b).p₂),
+    simp at r,
+    rw q,
+    rw r,
+    -- And now we just have to show that neither composing with ps πa πb nor identity changes anything - trivial.
+    split,
+    apply simp_ps_left,
+    apply simp_ps_right,
+    split,
+    rw C.left_id,
+    rw C.left_id,
+  end
+
 -- Composition can go inside the ps.
 -- (c → a×b, f g) ∘ h = (c' → a×b, f∘h g∘h)
 lemma refl_ps_compose {C : category} [has_all_products C] {c' c a b : C} (h : C.hom c' c) (f : C.hom c a) (g : C.hom c b)
