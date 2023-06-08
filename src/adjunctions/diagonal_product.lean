@@ -93,13 +93,25 @@ def diagonal_product_adjoint (C : category) [has_all_products C]
       have q : (diagonal_functor C).map_hom h = (h, h),
       refl,
       rw q,
-      
+      erw refl_product_compose,
+      rw ← C.assoc,
+      rw ← C.assoc,
     end,
   naturality_dr :=
     begin
       intros,
       simp,
-      
+      have q : (product_functor C).map_hom k = product_morphism k.fst k.snd,
+      refl,
+      rw q,
+      have r := product_morphism_commutes (po d.fst d.snd) (po d'.fst d'.snd) k.fst k.snd,
+      rw C.assoc,
+      rw ← r.left,
+      rw C.assoc,
+      rw ← r.right,
+      erw refl_product_compose,
+      rw ← C.assoc,
+      rw ← C.assoc,
     end,
 }
 

@@ -136,13 +136,6 @@ lemma product_of_composible_morphisms {C : category} {c c' d d' e e' : C}
     refl,
   end
 
-lemma product_of_composible_morphisms {C : category} {c c' d d' e e' : C}
-[has_all_products C]
-(f : C.hom c d) (f' : C.hom c' d') (g : C.hom d e) (g' : C.hom d' e')
-: C.compose (product_morphism g g') (product_morphism f f') = product_morphism (C.compose g f) (C.compose g' f'):=
-  begin
-  end
-
 -- Freely convert between unique arrows from c to a×b and
 -- product morphisms from c×c to a×b.
 lemma refl_ps_pm {C : category} {c a b : C} [has_all_products C]
