@@ -32,7 +32,7 @@ def terminal_object_in_Set : terminal_object Set :=
 }
 
 -- The cartesian product A × B along with its projection functions forms a binary product in the Set category
-lemma binary_product_in_Set (A B : Set.C₀) : is_binary_product Set (A × B) (λ p, p.1) (λ p, p.2) :=
+lemma cartesian_with_projections_binary_product_in_Set (A B : Set.C₀) : is_binary_product Set (A × B) (λ p, p.1) (λ p, p.2) :=
 begin
   intros Q q₁ q₂,
 
@@ -109,8 +109,16 @@ begin
   },
 end
 
--- The disjoint union A ⊕ B along with its inclusions maps forms a binary coproduct in the Set category
-lemma binary_coproduct_in_Set (A B : Set.C₀) : is_binary_coproduct Set (A ⊕ B) sum.inl sum.inr :=
+def binary_product_in_Set (A B : Set.C₀) : binary_product Set A B :=
+{
+  P := A × B, 
+  π₁ := λ p, p.1, 
+  π₂ := λ p, p.2, 
+  property := cartesian_with_projections_binary_propduct_in_Set A B, 
+}
+
+-- The disjoint union A ⊕ B along with its inclusion maps forms a binary coproduct in the Set category
+lemma union_with_inclusions_binary_coproduct_in_Set (A B : Set.C₀) : is_binary_coproduct Set (A ⊕ B) sum.inl sum.inr :=
 begin
   intros D i₁ i₂,
 
@@ -195,5 +203,13 @@ begin
     },
   },
 end
+
+def binary_coproduct_in_Set (A B : Set.C₀) : binary_coproduct Set A B :=
+{
+  Cₚ := A ⊕ B, 
+  ι₁ := sum.inl,
+  ι₂ := sum.inr,
+  property := union_with_inclusions_binary_coproduct_in_Set A B,
+}
 
 end category_theory
