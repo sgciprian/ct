@@ -17,6 +17,7 @@ def initial_object_in_Set : initial_object Set :=
   property := empty_set_initial_in_Set
 }
 
+
 -- The singleton (unit) set is a terminal object in the Set category
 lemma singleton_set_terminal_in_Set : is_terminal Set unit :=
 begin
@@ -30,6 +31,7 @@ def terminal_object_in_Set : terminal_object Set :=
   object := unit,
   property := singleton_set_terminal_in_Set,
 }
+
 
 -- The cartesian product A × B along with its projection functions forms a binary product in the Set category
 lemma cartesian_with_projections_binary_product_in_Set (A B : Set.C₀) : is_binary_product Set (A × B) (λ p, p.1) (λ p, p.2) :=
@@ -114,8 +116,9 @@ def binary_product_in_Set (A B : Set.C₀) : binary_product Set A B :=
   P := A × B, 
   π₁ := λ p, p.1, 
   π₂ := λ p, p.2, 
-  property := cartesian_with_projections_binary_propduct_in_Set A B, 
+  property := cartesian_with_projections_binary_product_in_Set A B, 
 }
+
 
 -- The disjoint union A ⊕ B along with its inclusion maps forms a binary coproduct in the Set category
 lemma union_with_inclusions_binary_coproduct_in_Set (A B : Set.C₀) : is_binary_coproduct Set (A ⊕ B) sum.inl sum.inr :=
