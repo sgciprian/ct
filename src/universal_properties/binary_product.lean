@@ -47,7 +47,32 @@ def po {C : category} [has_all_products C] (c d : C) := has_all_products.product
 -- c → a×b, f g
 def ps {C : category} [has_all_products C] {c a b : C} (f : C.hom c a) (g : C.hom c b) := (po a b).ue {x := c, x₁ := f, x₂ := g}
 
+-- Makes (unique) morphism from c to c×c via identities.
+def mk_prod {C : category} [has_all_products C] (c : C) : C.hom c (po c c).p :=
+  (po c c).ue {x := c, x₁ := C.id c, x₂ := C.id c}
+
 -- Some useful simplification rules.
+-- Composing the projection arrows with the c → c×c morph does nothing.
+lemma simp_mk_prod_left {C : category} [has_all_products C] (c : C)
+: C.compose (po c c).p₁ (mk_prod c) = C.id c :=
+  begin
+    unfold mk_prod,
+    have q := (po c c).ump {x := c, x₁ := C.id c, x₂ := C.id c},
+    simp at q,
+    symmetry,
+    exact q.left,
+  end
+
+lemma simp_mk_prod_right {C : category} [has_all_products C] (c : C)
+: C.compose (po c c).p₂ (mk_prod c) = C.id c :=
+  begin
+    unfold mk_prod,
+    have q := (po c c).ump {x := c, x₁ := C.id c, x₂ := C.id c},
+    simp at q,
+    symmetry,
+    exact q.right,
+  end
+
 -- f = πa ∘ (c → a×b, f g), where πa is the projection from a×b to a
 lemma simp_ps_left {C : category} [has_all_products C] {c a b : C} (f : C.hom c a) (g : C.hom c b)
 : f = C.compose (po a b).p₁ (ps f g) :=

@@ -136,6 +136,43 @@ lemma product_of_composible_morphisms {C : category} {c c' d d' e e' : C}
     refl,
   end
 
+lemma product_of_composible_morphisms {C : category} {c c' d d' e e' : C}
+[has_all_products C]
+(f : C.hom c d) (f' : C.hom c' d') (g : C.hom d e) (g' : C.hom d' e')
+: C.compose (product_morphism g g') (product_morphism f f') = product_morphism (C.compose g f) (C.compose g' f'):=
+  begin
+  end
+
+-- Freely convert between unique arrows from c to a×b and
+-- product morphisms from c×c to a×b.
+lemma refl_ps_pm {C : category} {c a b : C} [has_all_products C]
+(f : C.hom c a) (g : C.hom c b) : ps f g = C.compose (product_morphism f g) (mk_prod c) :=
+  begin
+    unfold ps,
+    -- ps is the unique arrow from c to a×b via f and g, now showing that
+    -- f×g ∘ (c → c×c, id id) is the same arrow
+    rw ← (po a b).uu {x := c, x₁ := f, x₂ := g} (C.compose (product_morphism f g) (mk_prod c)),
+    simp,
+    -- so we have to show that the left and right projections are equal to
+    -- f and g respectively
+    -- using our proof of product of morphisms commuting, we can change
+    -- our goal to essentially proving f ∘ πc (via id) = f (likewise for g)
+    have q := product_morphism_commutes (po c c) (po a b) f g,
+    split,
+    -- proving for f
+    rw C.assoc,
+    rw ← q.left,
+    rw ← C.assoc, 
+    rw simp_mk_prod_left,
+    rw C.left_id,
+    -- proving for g
+    rw C.assoc,
+    rw ← q.right,
+    rw ← C.assoc, 
+    rw simp_mk_prod_right,
+    rw C.left_id,
+  end
+
 -- help lean some more
 @[simp]
 lemma simp_product_morphism {C : category} {c c' d d' : C} {cp : binary_product c c'} {dp : binary_product d d'}
