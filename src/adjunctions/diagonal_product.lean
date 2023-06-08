@@ -5,20 +5,6 @@ import functors.diagonal
 
 namespace category_theory
 
--- Useful function that bundles c with two id c's, for use with c×c.
-def id_bundle {C : category} [has_all_products C] (c : C) : binary_product_bundle c c :=
-{
-  x := c,
-  x₁ := C.id c,
-  x₂ := C.id c,
-}
-
--- Apparently Lean needs to be able to figure out stuff...
-@[simp]
-lemma id_bundle_id₁ {C : category} [has_all_products C] (c : C) : (id_bundle c).x₁ = C.id c := by refl
-@[simp]
-lemma id_bundle_id₂ {C : category} [has_all_products C] (c : C) : (id_bundle c).x₂ = C.id c := by refl
-
 -- Constructing the adjunction structure for Δ⊣×.
 -- Δ is a functor from C to C×C
 -- × is a functor from C×C to C
@@ -69,47 +55,51 @@ def diagonal_product_adjoint (C : category) [has_all_products C]
     end,
   retr :=
   -- φr is isomorphic
-  -- Deconstruct h as its left and right C-category morphisms
-  -- then should be similar (but simpler) to proving section.
     begin
       intros c d h,
       simp,
-      unfold pm,
-      let ca := h.fst,
-      let cb := h.snd,
-      have q : (ca, cb) = h, simp,
-      rw ← q,
-
-      -- Showing left and right side are equal to ca and cb is identical to section. (t₂ and t₃ proofs)
-      -- copy-pasted from there
-      have q₁ := product_morphism_commutes (po c c) (po d.fst d.snd) ca cb, -- commuting diagram for (πa∘h)×(πb∘h)
-      have q₂ := (po c c).ump (id_bundle c), -- by ump, (po c c).p₁ ∘ (unique morph from c to c×c) = id
-      -- Proving πa side:
-      have t₁ : C.compose (po d.fst d.snd).p₁ (C.compose (product_morphism ca cb) ((po c c).ue (id_bundle c))) = ca,
-      rw C.assoc,   -- make it clear to lean that we intend to apply q₁
-      rw ← q₁.left,
-      rw ← C.assoc, -- help lean some more to replace the (po c c) stuff with just id
-      rw ← q₂.left,
-      simp,
-      apply C.left_id, -- done!
-      -- Now also for πb side, identical
-      have t₂ : C.compose (po d.fst d.snd).p₂ (C.compose (product_morphism ca cb) ((po c c).ue (id_bundle c))) = cb,
-      rw C.assoc,   -- make it clear to lean that we intend to apply q₁
-      rw ← q₁.right,
-      rw ← C.assoc, -- help lean some more to replace the (po c c) stuff with just id
-      rw ← q₂.right,
-      simp,
-      apply C.left_id, -- done!
-      -- end copy-paste
-
-      rw t₁,
-      rw t₂,
+      rw ← simp_ps_left,
+      rw ← simp_ps_right,
+      cases h,
+      refl,
     end,
   naturality_c :=
     begin
       intros,
       simp,
-      unfold pm,
+      rw refl_ps_compose,
+      rw refl_ps_pm,
+      rw refl_ps_pm,
+      rw simp_comp_left,
+      split,
+    end,
+  naturality_d :=
+    begin
+      intros,
+      simp,
+      rw refl_ps_pm,
+      rw C.assoc,
+      rw refl_ps_pm,
+      rw simp_comp_left,
+      have q : (product_functor C).map_hom k = product_morphism k.fst k.snd,
+      refl,
+      rw q,
+      apply product_of_composible_morphisms,
+    end,
+  naturality_cr :=
+    begin
+      intros,
+      simp,
+      have q : (diagonal_functor C).map_hom h = (h, h),
+      refl,
+      rw q,
+      
+    end,
+  naturality_dr :=
+    begin
+      intros,
+      simp,
+      
     end,
 }
 
