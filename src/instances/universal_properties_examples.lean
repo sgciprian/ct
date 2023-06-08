@@ -11,13 +11,25 @@ begin
   cases x, -- There are no elements in the empty set, so we can use cases to handle all possible cases (i.e., none)
 end
 
--- The singleton set is a terminal object in the Set category
-lemma singleton_terminal_in_Set (B : Set.C₀) (h : subsingleton B) : is_terminal Set B :=
+def initial_object_in_Set : initial_object Set :=
+{
+  object := empty,
+  property := empty_set_initial_in_Set
+}
+
+-- The singleton (unit) set is a terminal object in the Set category
+lemma singleton_set_terminal_in_Set : is_terminal Set unit :=
 begin
   intros A f g,
   funext x,
   apply subsingleton.elim (f x) (g x), -- Using the subsingleton property to conclude f x = g x
 end
+
+def terminal_object_in_Set : terminal_object Set :=
+{
+  object := unit,
+  property := singleton_set_terminal_in_Set,
+}
 
 -- The cartesian product A × B along with its projection functions forms a binary product in the Set category
 lemma binary_product_in_Set (A B : Set.C₀) : is_binary_product Set (A × B) (λ p, p.1) (λ p, p.2) :=
