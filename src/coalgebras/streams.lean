@@ -76,10 +76,9 @@ def stream_functor (α : Type u) : functor Types Types :=
     end
 }
 
-def stream_coalgebra : coalgebra Types :=
+def stream_coalgebra {α : Types.C₀} : coalgebra (stream_functor α) :=
 {
-  A := stream Types.C₀,
-  F := stream_functor Types.C₀,
+  A := stream α,
   ϕ := λ s, (s.head, s.tail)
 }
 
