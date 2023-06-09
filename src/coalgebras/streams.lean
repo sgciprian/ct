@@ -5,18 +5,11 @@ namespace category_theory
 
 universe u
 
-inductive stream (α : Type u) : Type u
-| cons (head : α) (tail : stream) : stream
+def stream (α : Type u) := nat → α
 
-def stream.head {α : Type*} (s : stream α) : α :=
-match s with
-| stream.cons h _ := h
-end
+def head {α : Type u} (s : stream α) : α := s 0
 
-def stream.tail {α : Type*} (s : stream α) : stream α :=
-match s with
-| stream.cons _ t := t
-end
+def tail {α : Type u} (s : stream α) : stream α := λ i, s (i+1)
 
 -- def map_stream {α β : Type*} (f : α → β) : stream α → stream β
 -- | (stream.cons h t) := stream.cons (f h) (map_stream t)
@@ -79,7 +72,7 @@ def stream_functor (α : Type u) : functor Types Types :=
 def stream_coalgebra {α : Types.C₀} : coalgebra (stream_functor α) :=
 {
   A := stream α,
-  ϕ := λ s, (s.head, s.tail)
+  ϕ := λ s, (head s, tail s)
 }
 
 end category_theory
