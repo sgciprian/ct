@@ -1,5 +1,5 @@
-import natural_transformation
 import functors
+import natural_transformation
 
 namespace category_theory
   
