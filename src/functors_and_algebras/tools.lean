@@ -1,3 +1,4 @@
+import category
 namespace category_theory
 
 universes u v
@@ -32,5 +33,12 @@ lemma pair_eq {α : Type u} {β : Type v}
   begin
     simp [fst, snd]
   end
+
+-- I have redefined the initial object structure, since the one in universal_properties, is not correct.
+structure initial (C : category) := 
+  (object : C.C₀)
+  (exist_morph : Π (X : C.C₀), C.hom object X)
+  (is_unique : ∀ {X : C.C₀} (f : C.hom object X), f = exist_morph X)
+
 
 end category_theory
