@@ -3,7 +3,7 @@ import functors
 
 namespace category_theory
 
--- An F-Algebra contains an object 𝔸 and a function φ : 𝔽 (𝔸) → 𝔸
+-- An F-Algebra contains an object 𝔸 and a morphism φ : 𝔽 (𝔸) → 𝔸
 structure Falgebra {C : category} (F : functor C C):=
   (object : C.C₀)
   (function : C.hom (F.map_obj object) object)
