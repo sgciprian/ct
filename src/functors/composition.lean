@@ -23,7 +23,10 @@ namespace category_theory
   -- notation
   infixr `⬝`:90 := composition_functor
 
-  theorem functor_comp_assoc {C D E F : category} (H : functor E F) (G : functor D E) (F : functor C D) :
-    (H ⬝ G) ⬝ F = H ⬝ (G ⬝ F) := rfl
+  def functor_comp_assoc {B C D E : category} : ∀ (F : B => C) (G : C => D) (H : D => E),
+    (H ⬝ G) ⬝ F = H ⬝ (G ⬝ F) := begin
+      intros,
+      trivial,
+    end
 
 end category_theory
