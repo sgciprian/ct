@@ -68,16 +68,36 @@ namespace category_theory
     begin
       intros,
       rw is_iso_nt,
-      admit,
+      intros,
+      rw is_iso,
+      existsi (F.map_hom (C.id X)),
+      split,
+      rw F.id,
+      rw D.right_id,
+      rw left_unit_nt,
+      change F.map_hom (C.id X) = D.id (F.map_obj X),
+      rw F.id,
+      rw F.id,
+      rw D.left_id,
+      rw left_unit_nt,
+      change F.map_hom (C.id X) = D.id (F.map_obj X),
+      rw F.id,
+      done,
     end
 
   def right_unit_nt {C D : category} (F : C => D)
     : F ⬝ Id C ==> F :=
     {
-      α := sorry,
+      α := λ X, F.map_hom $ C.id X,
       naturality_condition := begin
         intros,
-        admit,
+        rw F.id X,
+        rw D.left_id (F.map_hom f),
+        symmetry,
+        rw F.id Y,
+        change D.compose (D.id (F.map_obj Y)) (F.map_hom f) = F.map_hom f,
+        rw D.right_id,
+        done,
       end
     }
 
@@ -86,7 +106,18 @@ namespace category_theory
     begin
       intros,
       rw is_iso_nt,
-      admit,
+      intros,
+      rw is_iso,
+      rw right_unit_nt,
+      existsi (F.map_hom (C.id X)),
+      split,
+      change D.compose (F.map_hom (C.id X)) (F.map_hom (C.id X)) = D.id (F.map_obj X),
+      rw F.id,
+      rw D.left_id,
+      change D.compose (F.map_hom (C.id X)) (F.map_hom (C.id X)) = D.id (F.map_obj X),
+      rw F.id,
+      rw D.left_id,
+      done,
     end
 
 end category_theory
