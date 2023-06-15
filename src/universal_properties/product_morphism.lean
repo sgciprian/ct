@@ -175,4 +175,11 @@ lemma simp_product_morphism {C : category} {c c' d d' : C} {cp : binary_product 
     cc,
   end
 
+lemma refl_product_morphism_pm {C : category} {c c' d d' : C} {cp : binary_product c c'} {dp : binary_product d d'}
+{f : C.hom c d} {g : C.hom c' d'}
+: product_morphism f g = pm cp dp f g :=
+  begin
+    unfold pm,
+  end
+
 end category_theory
