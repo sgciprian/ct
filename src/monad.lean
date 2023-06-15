@@ -6,8 +6,8 @@ namespace category_theory
   structure Monad {C : category} (T : C => C) :=
     (μ : natural_transformation (T ⬝ T) T)
     (η : natural_transformation (Id C) T)
-    (assoc : ∀ X : C.C₀, (μ ⊚ μ × (ID T)).α X = (μ ⊚ (ID T) × μ).α X)
-    (lu : ∀ X : C.C₀, (μ ⊚ ID T × η).α X = (ID T).α X)
-    (ru : ∀ X : C.C₀, (μ ⊚ η × ID T).α X = (ID T).α X)
+    (assoc : μ ⊚ μ × (ID T) = μ ⊚ (ID T) × μ ⊚ (assoc_nt T T T))
+    (lu : μ ⊚ ID T × η = ID T ⊚ right_unit_nt T)
+    (ru : μ ⊚ η × ID T = ID T ⊚ left_unit_nt T)
   
 end category_theory
