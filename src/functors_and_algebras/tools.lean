@@ -40,5 +40,12 @@ structure initial (C : category) :=
   (exist_morph : Π (X : C.C₀), C.hom object X)
   (is_unique : ∀ {X : C.C₀} (f : C.hom object X), f = exist_morph X)
 
+inductive List (α: Type) : Type
+  | nil : List
+  | cons (head: α) (tail: List) : List
+
+inductive Maybe (α : Type)
+  | none : Maybe
+  | some : α → Maybe
 
 end category_theory

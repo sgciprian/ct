@@ -1,11 +1,8 @@
 import instances.Set_category
 import functors.functor
+import functors_and_algebras.tools
 
 open category_theory
-
-inductive Maybe (α : Type)
-  | none : Maybe
-  | some : α → Maybe
 
 -- Example of the Maybe functor 
 -- as known from Functional Programming Languages

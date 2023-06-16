@@ -1,12 +1,8 @@
 import instances.Set_category
 import functors.functor
+import functors_and_algebras.tools
 
 open category_theory
-
-inductive List (α: Type) : Type
-  | nil : List
-  | cons (head: α) (tail: List) : List
-
 
 -- Example of the List functor 
 -- as known from Functional Programming Languages

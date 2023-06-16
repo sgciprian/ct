@@ -1,12 +1,11 @@
 import category
 import instances.Set_category
-import instances.functors.List_functor
 import functors_and_algebras.tools
 import functors_and_algebras.f_algebra
 import functors_and_algebras.list_functor
 import functors_and_algebras.algebra_category
 
-namespace category_theory
+open category_theory
 
 -- Morphism 𝔽 (X) → X
 -- This function provides an easy way to create a function for the algebra using the 1 + 𝔸 × X functor.
@@ -108,7 +107,7 @@ def init_hom  {S : Set.C₀} (B : Falgebra (list_algebra_functor S)) : Fhomomorp
 } 
 
 -- Proof that the initial list F-algebra is indeed the initial object in the Algebra category of the 1 + 𝔸 × X functor
-def initial_list_algebra_proof {A : Set.C₀} : initial ((AlgebraCategory (list_algebra_functor A))) := 
+def initial_list_algebra_proof (A : Set.C₀) : initial ((AlgebraCategory (list_algebra_functor A))) := 
 {
   -- The initial object is the List A F-algebra
   object := initial_list_algebra A,
@@ -189,5 +188,3 @@ def initial_list_algebra_proof {A : Set.C₀} : initial ((AlgebraCategory (list_
       simp [test]
     end
 }
-
-end category_theory
