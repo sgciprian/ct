@@ -24,13 +24,11 @@ def r_product_functor {C : category} [has_all_products C] (c : C) : functor C C 
       intro,
       rw identity_morphism_of_product,
     end,
-  -- already proved (g∘f)×(g'∘f') = g×g' ∘ f×f', just need to do some
-  -- rewriting so lean lets us apply the lemma
+  -- already proved (g∘f)×(g'∘f') = g×g' ∘ f×f'
   comp :=
     begin
       intros,
-      repeat { rw refl_product_morphism_pm },
-      rw product_of_composible_morphisms,
+      rw refl_product_morphism_compose,
       rw C.left_id,
     end,
 }

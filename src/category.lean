@@ -23,6 +23,11 @@ lemma simp_comp_left {C : category} {X Y Z : C} {f₁ f₂ : C.hom Y Z} {g : C.h
     cc,
   end
 
+lemma simp_comp_right {C : category} {X Y Z : C} {f : C.hom Y Z} {g₁ g₂ : C.hom X Y} : g₁ = g₂ → C.compose f g₁ = C.compose f g₂ :=
+  begin
+    cc,
+  end
+
 --notation
 --infixr `⟶`:90 := category.hom
 --infix (name := category_compose) `∘`:90 := category.compose

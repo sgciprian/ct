@@ -182,4 +182,14 @@ lemma refl_product_morphism_pm {C : category} {c c' d d' : C} {cp : binary_produ
     unfold pm,
   end
 
+-- Identical to product_of_composible_morphisms, but for use in categories where all products exist.
+lemma refl_product_morphism_compose {C : category} [has_all_products C] {c c' d d' e e' : C}
+(f : C.hom c d) (f' : C.hom c' d') (g : C.hom d e) (g' : C.hom d' e')
+: C.compose (product_morphism g g') (@product_morphism C c d c' d' (po c c') (po d d') f f')
+= @product_morphism C c e c' e' (po c c') (po e e') (C.compose g f) (C.compose g' f')  :=
+  begin
+    repeat { rw refl_product_morphism_pm },
+    apply product_of_composible_morphisms,
+  end
+
 end category_theory
