@@ -6,10 +6,6 @@ import functors_and_algebras.fusion_property
 
 open category_theory
 
--- Definition of map 
-def map {A B : Set.C₀} (f : Set.hom A B) : Set.hom (List A) (List B) :=
-  fold (List_fun (λ _, List.nil) (λ p, List.cons (f (fst p)) (snd p)))
-
 def list_algebra (A : Set.C₀) (f : (Set.hom ((list_algebra_functor A).map_obj (List A)) (List A))) :
  Falgebra (list_algebra_functor A) :=
 {

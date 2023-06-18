@@ -48,4 +48,8 @@ inductive Maybe (α : Type)
   | none : Maybe
   | some : α → Maybe
 
+inductive BTree (α : Type)
+  | leaf (el : α) : BTree
+  | node (l :BTree) (r : BTree) : BTree
+
 end category_theory
