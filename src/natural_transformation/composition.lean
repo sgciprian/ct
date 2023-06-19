@@ -56,13 +56,14 @@ namespace category_theory
     {F G H : C => D}
     (τ₁ : G ==> H) (τ₂ : F ==> G) : F ==> H :=
     {
-      α := begin
-        intros,
-        let f := τ₁.α X,
-        let g := τ₂.α X,
-        let h := D.compose f g,
-        exact h,
-      end,
+      α := λ X, D.compose (τ₁.α X) (τ₂.α X),
+ --      begin
+ --        intros,
+ --        let f := τ₁.α X,
+ --        let g := τ₂.α X,
+ --        let h := D.compose f g,
+ --        exact h,
+ --      end,
       naturality_condition := begin
         intros,
         let a := τ₁.naturality_condition f,
