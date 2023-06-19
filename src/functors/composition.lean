@@ -3,10 +3,10 @@ import functors.functor
 namespace category_theory
 
   -- Creates the composition of two functors.
-  def composition_functor {C D E : category} (G : functor D E) (F : functor C D) : functor C E :=
+  def composition_functor {𝒞 𝒟 ℰ : category} (G : 𝒟 ⇒ ℰ) (F : 𝒞 ⇒ 𝒟) : 𝒞 ⇒ ℰ :=
   {
-    map_obj := λ X : C, G.map_obj (F.map_obj X),
-    map_hom := λ X Y : C, λ f, G.map_hom (F.map_hom f),
+    map_obj := λ X : 𝒞, G.map_obj (F.map_obj X),
+    map_hom := λ X Y : 𝒞, λ f, G.map_hom (F.map_hom f),
     id :=
       begin
         intro,
@@ -21,10 +21,10 @@ namespace category_theory
       end,
   }
   -- notation
-  infixr `⬝`:90 := composition_functor
+  infixr `•`:90 := composition_functor
 
-  def functor_comp_assoc {B C D E : category} : ∀ (F : B => C) (G : C => D) (H : D => E),
-    (H ⬝ G) ⬝ F = H ⬝ (G ⬝ F) := begin
+  def functor_comp_assoc {𝒞 𝒟 ℰ ℱ : category} : ∀ (F : 𝒞 ⇒ 𝒟) (G : 𝒟 ⇒ ℰ) (H : ℰ ⇒ ℱ),
+    (H • G) • F = H • (G • F) := begin
       intros,
       trivial,
     end
