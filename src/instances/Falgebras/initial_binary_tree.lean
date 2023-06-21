@@ -7,8 +7,14 @@ import functors_and_algebras.algebra_category
 open category_theory
 open category_theory.BTree
 
+-- The algebra of the 𝔸 + (X × X) functor, where the object is a binary tree.
 def bin_tree_algebra {A : Set.C₀} : Falgebra (bin_tree_algebra_functor A) := {
+  -- The object is a binary tree.
   object := BTree A,
+  -- Mapping 𝔸 + (X × X) to a Binary tree is done by:
+  -- 1) 𝔸 is mapped to leaf (𝔸)
+  -- 2) (X × X) is mapped to node X X, we can imagine the 2 elements of the product
+  -- as the branches of a tree node.  
   function := 
   begin
     intro F,
@@ -22,31 +28,48 @@ def bin_tree_algebra {A : Set.C₀} : Falgebra (bin_tree_algebra_functor A) := {
   end,
 }
 
+-- Construction of the universal homomorphism from the Algebra with object binary tree, to any algebra of the 𝔸 + (X × X) endofunctor
 def bin_tree_hom {A : Set.C₀} (to : Falgebra (bin_tree_algebra_functor A)) : Fhomomorphism bin_tree_algebra to := {
+  -- The morphism utilized the function of the other algebra, since this is a catamorphism.
+  -- We can map the binary tree structure back to the form 𝔸 + (X × X) in order to have a compatible type.
   morph:= 
-      begin
-        intro x,
-        induction x,
-        case leaf : a {
-          exact to.function (Either.left a),
-        },
-        case node : l r ihl ihr {
-          exact to.function (Either.right ⟨ihl, ihr⟩),
-        },
-      end,
-      square_proof:= 
-      begin
-        simp,
-        apply funext,
-        intro x,
-        cases x,
-        case Either.left : a {
-          refl,
-        },
-        case Either.right : p {
-          refl,
-        },
-      end,
+    begin
+      intro x,
+      induction x,
+      case leaf : a {
+        exact to.function (Either.left a),
+      },
+      -- Induction is used since, binary tree uses a recursive definition.
+      case node : l r ihl ihr {
+        exact to.function (Either.right ⟨ihl, ihr⟩),
+      },
+    end,
+  -- Now we need to prove that the morphism commutes the diagram :
+  --                    φ
+  --      𝔸 + (X × X)   →   X
+  --
+  --   F(∎ψ∎) ↓             ↓ ∎ψ∎
+  --
+  --      𝔸 + (Y × Y)   →   Y
+  --                    ψ
+  -- This is a simple proof, since we know how the morphism utilizes ψ.
+  -- Lean is able to alleviate the work on this proof, because The Set category utilizes 
+  -- built-in features and we have defined the morphism directly during construction of the homomorphism,
+  -- so Lean can automate the proof. 
+  -- For a more detailed explanation, one can inspect the proof of why fold is a catamorphism for the categoty of algebras, defined by the 1 + (𝔸 × X) functor.
+  square_proof:= 
+    begin
+      simp,
+      apply funext,
+      intro x,
+      cases x,
+      case Either.left : a {
+        refl,
+      },
+      case Either.right : p {
+        refl,
+      },
+    end,
 }
 
 def bin_tree_algebra_initial_proof {A : Set.C₀} : initial (AlgebraCategory (bin_tree_algebra_functor A)) := {

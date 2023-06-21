@@ -1,4 +1,7 @@
 import category
+import functors.functor
+import functors_and_algebras.f_algebra
+import functors_and_algebras.algebra_category
 namespace category_theory
 
 universes u v
@@ -39,6 +42,74 @@ structure initial (C : category) :=
   (object : C.C₀)
   (exist_morph : Π (X : C.C₀), C.hom object X)
   (is_unique : ∀ {X : C.C₀} (f : C.hom object X), f = exist_morph X)
+
+structure initial_algebra {C : category} (F : functor C C) :=
+  (alg : Falgebra F)
+  (cata : ∀ {B : Falgebra F} (φ : C.hom (F.map_obj B.object) B.object), (AlgebraCategory F).hom alg B)
+  (is_unique :  ∀ {X : (AlgebraCategory F).C₀} (f : (AlgebraCategory F).hom alg X), f = cata X.function)
+
+
+def eq_r : ∀ {C : category} {F : functor C C} (A : initial_algebra F), initial (AlgebraCategory F) :=
+begin
+  intros,
+  exact {
+    object := A.alg,
+    exist_morph := 
+    begin
+      intros,
+      exact A.cata X.function,
+    end,
+    is_unique := 
+    begin
+      intros,
+      exact A.is_unique f,
+    end,
+  }
+end
+
+def eq_l : ∀  {C : category} {F : functor C C} (A : initial (AlgebraCategory F)), initial_algebra F :=
+begin
+  intros,
+  exact  {
+    alg := A.object,
+    cata := 
+    begin
+      intros,
+      exact A.exist_morph B,
+    end,
+    is_unique :=
+    begin
+      intros,
+      exact A.is_unique f,
+    end,
+  }
+end
+-- variable C : category
+-- variable F : functor C C
+-- #check initial_algebra F
+-- #check initial (AlgebraCategory F)
+
+-- theorem algrebra_initiality {C : category} {F : functor C C} : initial_algebra F = initial (AlgebraCategory F) :=
+-- begin 
+
+--   -- apply eq.congr,
+--   -- apply classical.by_contradiction,
+--   -- intro h,
+--   -- cases h,
+
+--   sorry,
+--   -- have h1 := @eq_l C F,
+--   -- have h2 := @eq_r C F,
+--   -- have h3 := eq.to_iff ((initial_algebra F) = initial (AlgebraCategory F)),
+  
+--   -- rw [eq_l, eq_r],
+-- end
+
+class isomorphism {C : category} {N M : C.C₀} (hom : C.hom N M) :=
+  (inverse : C.hom M N)
+  (idl : C.compose hom inverse = C.id M)
+  (idr : C.compose inverse hom = C.id N)
+
 
 inductive List (α: Type) : Type
   | nil : List
