@@ -5,19 +5,19 @@ namespace category_theory
 
   notation (name := none) ∅ := Maybe.none
 
-  def join_maybe {α : Type*} : Maybe (Maybe α) → Maybe α
+  def Maybe.join {α : Type*} : Maybe (Maybe α) → Maybe α
   | ∅ := ∅
   | (Maybe.some x) := x
 
-  def return_maybe {α : Type*} (x : α) : Maybe α := Maybe.some x
+  def Maybe.return {α : Type*} (x : α) : Maybe α := Maybe.some x
 
   def monad_maybe : Monad MaybeFunctor :=
   {
     μ := {
-      α := λ X, join_maybe,
+      α := λ X, Maybe.join,
       naturality_condition := begin
         intros,
-        change (Maybe.fmap f) ∘ join_maybe = join_maybe ∘ (Maybe.fmap (Maybe.fmap f)), 
+        change (Maybe.fmap f) ∘ Maybe.join = Maybe.join ∘ (Maybe.fmap (Maybe.fmap f)), 
         apply funext,
         intro x,
         cases x,
@@ -27,10 +27,10 @@ namespace category_theory
       end,
     },
     η := {
-      α := λ X, return_maybe,
+      α := λ X, Maybe.return,
       naturality_condition := begin
         intros,
-        -- change (Maybe.fmap f) ∘ return_maybe = return_maybe ∘ f,
+        -- change (Maybe.fmap f) ∘ Maybe.return = Maybe.return ∘ f,
         -- change (Maybe.fmap f) ∘ Maybe.some = Maybe.some ∘ f,
         trivial,
         done,
@@ -44,7 +44,7 @@ namespace category_theory
       rw ID,
       rw left_unit_nt,
       apply nt_eq,
-      change (λ X, Set.compose (Set.id (MaybeFunctor.map_obj X)) (MaybeFunctor.map_hom (Set.id X))) = (λ (X : ↥Set), Set.compose (join_maybe) (Set.compose (return_maybe) ((Id Set).map_hom (Set.id (MaybeFunctor.map_obj X))))),
+      change (λ X, Set.compose (Set.id (MaybeFunctor.map_obj X)) (MaybeFunctor.map_hom (Set.id X))) = (λ (X : ↥Set), Set.compose (Maybe.join) (Set.compose (Maybe.return) ((Id Set).map_hom (Set.id (MaybeFunctor.map_obj X))))),
       apply funext,
       intro X,
       rw MaybeFunctor.id,
@@ -59,14 +59,14 @@ namespace category_theory
       rw ID,
       rw right_unit_nt,
       apply nt_eq,
-      change (λ (X : ↥Set), Set.compose (Set.id (MaybeFunctor.map_obj X)) (MaybeFunctor.map_hom (Set.id X))) = (λ (X : ↥Set), Set.compose (join_maybe) (Set.compose (Set.id (MaybeFunctor.map_obj (MaybeFunctor.map_obj X))) (MaybeFunctor.map_hom (return_maybe)))),
+      change (λ (X : ↥Set), Set.compose (Set.id (MaybeFunctor.map_obj X)) (MaybeFunctor.map_hom (Set.id X))) = (λ (X : ↥Set), Set.compose (Maybe.join) (Set.compose (Set.id (MaybeFunctor.map_obj (MaybeFunctor.map_obj X))) (MaybeFunctor.map_hom (Maybe.return)))),
       apply funext,
       intro X,
       rw MaybeFunctor.id,
       rw Set.left_id,
-      change Set.id (MaybeFunctor.map_obj X) = Set.compose join_maybe (Set.compose (Set.id (Maybe (Maybe X))) (MaybeFunctor.map_hom return_maybe)),
+      change Set.id (MaybeFunctor.map_obj X) = Set.compose Maybe.join (Set.compose (Set.id (Maybe (Maybe X))) (MaybeFunctor.map_hom Maybe.return)),
       rw Set.right_id,
-      change id = join_maybe ∘ (Maybe.fmap return_maybe),
+      change id = Maybe.join ∘ (Maybe.fmap Maybe.return),
       apply funext,
       intro x,
       cases x,
@@ -83,7 +83,7 @@ namespace category_theory
       rw [nt_composition, bimap],
       rw nt_composition,
       apply nt_eq,
-      change (λ (X : ↥Set), Set.compose (join_maybe) (Set.compose (Set.compose (Set.id (Maybe (Maybe X))) (MaybeFunctor.map_hom (join_maybe))) (MaybeFunctor.map_hom (MaybeFunctor.map_hom (MaybeFunctor.map_hom (Set.id X)))))) = (λ X, Set.compose (join_maybe) (Set.compose (join_maybe) (MaybeFunctor.map_hom (MaybeFunctor.map_hom (Set.id (MaybeFunctor.map_obj X)))))),
+      change (λ (X : ↥Set), Set.compose (Maybe.join) (Set.compose (Set.compose (Set.id (Maybe (Maybe X))) (MaybeFunctor.map_hom (Maybe.join))) (MaybeFunctor.map_hom (MaybeFunctor.map_hom (MaybeFunctor.map_hom (Set.id X)))))) = (λ X, Set.compose (Maybe.join) (Set.compose (Maybe.join) (MaybeFunctor.map_hom (MaybeFunctor.map_hom (Set.id (MaybeFunctor.map_obj X)))))),
       apply funext,
       intro X,
       rw Set.right_id,
