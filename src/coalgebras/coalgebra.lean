@@ -1,21 +1,15 @@
-import ..functors.functor
+import ..functors.functor ..universal_properties
 
 universe w
 
 namespace category_theory
 
--- structure coalgebra (C: category) [F : functor C C] :=
--- (A : C.C₀)
--- (ϕ : C.hom A (F.map_obj A))
-
 structure coalgebra {C: category} (F : functor C C) :=
-(A : C.C₀)
-(ϕ : C.hom A (F.map_obj A))
+(object : C.C₀)
+(morphism : C.hom object (F.map_obj object))
 
--- structure coalgebra (C: category) :=
--- (A : C.C₀)
--- (F : functor C C)
--- (ϕ : C.hom A (F.map_obj A))
-
+structure f_coalgebra_homomorphism {C : category} {F : functor C C} (A B : coalgebra F) :=
+  (morphism : C.hom A.object B.object)
+  (proof : C.compose B.morphism morphism = C.compose (F.map_hom morphism) A.morphism) 
 
 end category_theory
