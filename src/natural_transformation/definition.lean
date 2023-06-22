@@ -13,5 +13,15 @@ structure natural_transformation {𝒞 𝒟 : category} (F G : 𝒞 ⇒ 𝒟) :=
   -- notation
   infixr `≫`:75 := natural_transformation
 
+  theorem nt_eq {𝒞 𝒟 : category} {F G : 𝒞 ⇒ 𝒟} (α β : F ≫ G) : 
+    α.α = β.α → α = β :=
+    begin
+      intro h,
+      cases α,
+      cases β,
+      congr,
+      exact h,
+    end
+
 
 end category_theory
