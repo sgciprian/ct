@@ -11,7 +11,7 @@ namespace category_theory
 
   def Maybe.return {α : Type*} (x : α) : Maybe α := Maybe.some x
 
-  def monad_maybe : Monad Maybe.functor :=
+  def Maybe.monad : Monad Maybe.functor :=
   {
     μ := {
       α := λ X, Maybe.join,
