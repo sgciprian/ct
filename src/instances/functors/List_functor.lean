@@ -22,7 +22,7 @@ def List.fmap {α β: Type} (f: α → β) : List α → List β
 
 -- Example of the List functor 
 -- as known from Functional Programming Languages
-def List.functor : functor Set Set :=
+def List.functor : Set ⇒ Set :=
 {
   -- Objects are mapped to Lists 
   map_obj := λ A, List A,

@@ -13,7 +13,7 @@ def Maybe.fmap {α β : Type*} (f : α → β) : Maybe α → Maybe β
 
 -- Example of the Maybe functor 
 -- as known from Functional Programming Languages
-def Maybe.functor : functor Set Set :=
+def Maybe.functor : Set ⇒ Set :=
 {
   -- Objects are mapped to the Maybe type.
   map_obj := λ A, Maybe A,
