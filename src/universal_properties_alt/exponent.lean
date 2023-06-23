@@ -1,6 +1,6 @@
 import functors.functor
-import universal_properties.binary_product
-import universal_properties.product_morphism
+import universal_properties_alt.binary_product
+import universal_properties_alt.product_morphism
 
 namespace category_theory
 

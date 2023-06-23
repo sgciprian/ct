@@ -1,5 +1,5 @@
 import universal_properties
-import .Set_category
+import instances.Set_category
 
 namespace category_theory
 

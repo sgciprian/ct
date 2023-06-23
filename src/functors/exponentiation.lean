@@ -1,6 +1,6 @@
 import functors.functor
-import universal_properties.binary_product
-import universal_properties.exponent
+import universal_properties_alt.binary_product
+import universal_properties_alt.exponent
 
 namespace category_theory
 

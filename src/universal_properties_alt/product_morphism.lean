@@ -1,5 +1,5 @@
 import functors.functor
-import universal_properties.binary_product
+import universal_properties_alt.binary_product
 
 namespace category_theory
 
