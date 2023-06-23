@@ -1,4 +1,4 @@
-import universal_properties
+import universal_properties.universal_properties
 import instances.Set_category
 
 namespace category_theory

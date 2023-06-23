@@ -22,7 +22,7 @@ def rproduct_exponentiation_adjoint {𝒞 : category} [has_all_products 𝒞] [h
   -- the evaluation arrow with h'×Id_c.
     begin
       intros a b h',
-      exact C.compose (exp b c).ev (product_morphism h' (C.id c)),
+      exact 𝒞.compose (exp b c).ev (product_morphism h' (𝒞.id c)),
     end,
   sect :=
   -- φ is isomorphic (preserves structure)
@@ -34,7 +34,7 @@ def rproduct_exponentiation_adjoint {𝒞 : category} [has_all_products 𝒞] [h
       intros a b h',
       simp,
       symmetry,
-      apply (exp b c).uu a (C.compose (exp b c).ev (product_morphism h' (C.id c))) h',
+      apply (exp b c).uu a (𝒞.compose (exp b c).ev (product_morphism h' (𝒞.id c))) h',
       refl,
     end,
   retr :=
@@ -56,14 +56,14 @@ def rproduct_exponentiation_adjoint {𝒞 : category} [has_all_products 𝒞] [h
   naturality_c :=
     begin
       intros a b h x k,
-      have q : (r_product_functor c).map_hom k = product_morphism k (C.id c) := by refl,
+      have q : (r_product_functor c).map_hom k = product_morphism k (𝒞.id c) := by refl,
       rw q,
       -- via uniqueness property, this is equiv. to proving
       -- h ∘ k×Id_c =  ev_b^c ∘ (h_ue ∘ k)×Id_c
       apply (exp b c).uu,
       -- by ump for h, h = ev_b^c ∘ h_ue×Id_c
       rw (exp b c).ump a h,
-      rw ← C.assoc,
+      rw ← 𝒞.assoc,
       apply simp_comp_right,
       -- goal is now ue_h×Id_c ∘ k×Id_c = (ue_(ev_b^c ∘ ue_h×Id_c) ∘ k)×Id_c
       -- via g×g' ∘ f×f' = (g∘f)×(g'∘f'), we change this to
@@ -76,7 +76,7 @@ def rproduct_exponentiation_adjoint {𝒞 : category} [has_all_products 𝒞] [h
       -- equivalent to ue_h = ue_(ev_b^c ∘ ue_h×Id_c), which is just ump
       rw ← (exp b c).ump a h,
       -- prove right side, trivial Id_c ∘ Id_c = Id_c
-      rw C.left_id,
+      rw 𝒞.left_id,
     end,
   naturality_d :=
     begin
@@ -87,11 +87,11 @@ def rproduct_exponentiation_adjoint {𝒞 : category} [has_all_products 𝒞] [h
       unfold exp_hom,
       apply (exp x c).uu,
       rw ← exp_hom,
-      rw ← C.left_id (C.id c),
+      rw ← 𝒞.left_id (𝒞.id c),
       rw ← refl_product_morphism_compose,
-      rw C.assoc,
+      rw 𝒞.assoc,
       rw simp_exp_hom,
-      rw ← C.assoc,
+      rw ← 𝒞.assoc,
       rw simp_comp_right,
       -- this is exactly wht we get from the ump
       rw ← (exp b c).ump,
@@ -99,23 +99,23 @@ def rproduct_exponentiation_adjoint {𝒞 : category} [has_all_products 𝒞] [h
   naturality_cr :=
     begin
       intros a b h x k,
-      have q : (r_product_functor c).map_hom k = product_morphism k (C.id c) := by refl,
+      have q : (r_product_functor c).map_hom k = product_morphism k (𝒞.id c) := by refl,
       rw q,
-      rw ← C.assoc,
+      rw ← 𝒞.assoc,
       rw refl_product_morphism_compose,
-      rw C.left_id,
+      rw 𝒞.left_id,
     end,
   naturality_dr :=
     begin
       intros a b h x k,
       have q : (exponentiation_functor c).map_hom k = exp_hom c k := by refl,
       rw q,
-      rw C.assoc,
+      rw 𝒞.assoc,
       rw ← simp_exp_hom,
-      rw ← C.assoc,
+      rw ← 𝒞.assoc,
       rw simp_comp_right,
       rw refl_product_morphism_compose,
-      rw C.left_id,
+      rw 𝒞.left_id,
     end,
 }
 
