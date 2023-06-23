@@ -25,19 +25,26 @@
 
 ### Notes
 [Category Theory for Programming][ahrens] - Benedikt Ahrens, Kobe Wullaert - duh  
+[Generic Programming with Adjunctions][hinze] - Ralf Hinze - specifically for adjunctions
 
 [ahrens]: https://github.com/benediktahrens/CT4P
+[hinze]: https://www.cs.ox.ac.uk/ralf.hinze/LN.pdf
 
 ### Books
 [Basic Category Theory][leinster] - Tom Leinster - more fleshed out explanations and more definitions  
 [Categories for the Working Mathematician][maclane] - Saunders Mac Lane - reference textbook
+[Category Theory][awodey] - longer and some more concepts compared to Leinster
 
 [leinster]: https://arxiv.org/abs/1612.09375
 [maclane]: http://www.mtm.ufsc.br/~ebatista/2016-2/maclanecat.pdf
+[awodey]: https://global.oup.com/ukhe/product/category-theory-9780199237180?cc=nl&lang=en& 
 
 ### Articles
+[A Taste of Category Theory for Computer Scientists][pierce] - Benjamin Pierce - older tutorial, explicit focus on applications to computer science  
+[Adjunctions][rydeheard] - David Rydeheard - old notation but intuitive introduction
 
-
+[pierce]: https://kilthub.cmu.edu/articles/journal_contribution/A_taste_of_category_theory_for_computer_scientists/6602756/1
+[rydeheard]: https://link.springer.com/content/pdf/10.1007/3-540-17162-2_116.pdf
 
 
 ## Lean
