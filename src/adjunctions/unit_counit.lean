@@ -28,8 +28,8 @@ namespace category_theory
 -- for any d ∈ D₀, η (R d) maps R d to R (L (R d)),
 --             and R (ε d) maps R (L (R d)) to R d.
 structure adjunction_unit {C D : category} (L : functor C D) (R : functor D C) :=
-(η : natural_transformation (Id C) (R⬝L))
-(ε : natural_transformation (L⬝R) (Id D))
+(η : natural_transformation (Id C) (R•L))
+(ε : natural_transformation (L•R) (Id D))
 (id_L : ∀ (c : C), D.compose (ε.α (L c)) (L.map_hom (η.α c)) = D.id (L.map_obj c))
 (id_R : ∀ (d : D), C.compose (R.map_hom (ε.α d)) (η.α (R d)) = C.id (R.map_obj d))
 
