@@ -20,12 +20,12 @@ namespace category_theory
 --       d ←   d×j   → j
 
 -- Definition for the product functor.
-def product_functor (C : category) [has_all_products C] : functor (Product C C) C :=
+def product_functor (𝒞 : category) [has_all_products 𝒞] : (Product 𝒞 𝒞) ⇒ 𝒞 :=
 {
   -- maps each object ⟨c, d⟩ to c×d.
-  map_obj := λ (c : Product C C), (po c.fst c.snd).p,
+  map_obj := λ (c : Product 𝒞 𝒞), (po c.fst c.snd).p,
   -- maps each morphism ⟨f,g⟩ to the product f×g.
-  map_hom := λ {p q : Product C C} (m : (Product C C).hom p q),
+  map_hom := λ {p q : Product 𝒞 𝒞} (m : (Product 𝒞 𝒞).hom p q),
     begin
       -- for ease of use we define consistent with previous notation:
       let f := m.fst, -- f as the left element of the tuple morphism m

@@ -5,7 +5,7 @@ import functors.exponentiation
 
 namespace category_theory
 
-def rproduct_exponentiation_adjoint {C : category} [has_all_products C] [has_exponentiation C] (c : C)
+def rproduct_exponentiation_adjoint {𝒞 : category} [has_all_products 𝒞] [has_exponentiation 𝒞] (c : 𝒞)
 : adjunction_hom (r_product_functor c) (exponentiation_functor c) :=
 {
   φ :=

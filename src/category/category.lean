@@ -18,12 +18,12 @@ instance coe_category : has_coe_to_sort category (Sort u) :=
   coe := λ c, c.C₀
 }
 
-lemma simp_comp_left {C : category} {X Y Z : C} {f₁ f₂ : C.hom Y Z} {g : C.hom X Y} : f₁ = f₂ → C.compose f₁ g = C.compose f₂ g :=
+lemma simp_comp_left {𝒞 : category} {X Y Z : 𝒞} {f₁ f₂ : 𝒞.hom Y Z} {g : 𝒞.hom X Y} : f₁ = f₂ → 𝒞.compose f₁ g = 𝒞.compose f₂ g :=
   begin
     cc,
   end
 
-lemma simp_comp_right {C : category} {X Y Z : C} {f : C.hom Y Z} {g₁ g₂ : C.hom X Y} : g₁ = g₂ → C.compose f g₁ = C.compose f g₂ :=
+lemma simp_comp_right {𝒞 : category} {X Y Z : 𝒞} {f : 𝒞.hom Y Z} {g₁ g₂ : 𝒞.hom X Y} : g₁ = g₂ → 𝒞.compose f g₁ = 𝒞.compose f g₂ :=
   begin
     cc,
   end

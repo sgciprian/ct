@@ -5,10 +5,10 @@ import universal_properties_alt.product_morphism
 namespace category_theory
 
 -- Defines the exponent object and its properties for two (specific) objects in C.
-structure exponent {C : category} [has_all_products C] (b a : C) :=
+structure exponent {𝒞 : category} [has_all_products 𝒞] (b a : 𝒞) :=
 -- has object b^a and arrow eval : (b^a × a) → b with universal property 
-(ob : C)
-(ev : C.hom (po ob a).p b)
+(ob : 𝒞)
+(ev : 𝒞.hom (po ob a).p b)
 -- for all other objects c with morphisms g from c×a to b, there is a unique morphism
 -- g⋆ mapping c to b^a×a that makes the triangle in the diagram commute:
 --           ev_b^a
@@ -18,17 +18,17 @@ structure exponent {C : category} [has_all_products C] (b a : C) :=
 --        |       ↗ g
 --       c×a
 -- Existence
-(ue : Π (c : C) (g : C.hom (po c a).p b), C.hom c ob)
-(ump : ∀ (c : C) (g : C.hom (po c a).p b), g = C.compose ev (product_morphism (ue c g) (C.id a)))
+(ue : Π (c : 𝒞) (g : 𝒞.hom (po c a).p b), 𝒞.hom c ob)
+(ump : ∀ (c : 𝒞) (g : 𝒞.hom (po c a).p b), g = 𝒞.compose ev (product_morphism (ue c g) (𝒞.id a)))
 -- Uniqueness
-(uu : ∀ (c : C) (g : C.hom (po c a).p b) (h : C.hom c ob), g = C.compose ev (product_morphism h (C.id a)) → h = ue c g)
+(uu : ∀ (c : 𝒞) (g : 𝒞.hom (po c a).p b) (h : 𝒞.hom c ob), g = 𝒞.compose ev (product_morphism h (𝒞.id a)) → h = ue c g)
 
 -- Category with exponentiation.
-class has_exponentiation (C : category) [has_all_products C] :=
-(exp : Π (a b : C), exponent a b)
+class has_exponentiation (𝒞 : category) [has_all_products 𝒞] :=
+(exp : Π (a b : 𝒞), exponent a b)
 
 -- Short-hand for b^a.
-def exp {C : category} [has_all_products C] [has_exponentiation C] (b a : C) := has_exponentiation.exp b a
+def exp {𝒞 : category} [has_all_products 𝒞] [has_exponentiation 𝒞] (b a : 𝒞) := has_exponentiation.exp b a
 
 -- Pierce example 71 (2.11, pg. 32)
 -- Converts morphisms f:b → c to the unique morphism f*:b^a→c^a given by f∘ev_b^a : b^a×a → c.
@@ -38,8 +38,8 @@ def exp {C : category} [has_all_products C] [has_exponentiation C] (b a : C) := 
 -- unique   |       ↗  f ∘ ev_b^a
 --          |     ↗
 --      b^a × a
-def exp_hom {C : category} [has_all_products C] [has_exponentiation C] (a : C) {b c : C} (f : C.hom b c)
-: C.hom (exp b a).ob (exp c a).ob := (exp c a).ue (exp b a).ob (C.compose f (exp b a).ev) 
+def exp_hom {𝒞 : category} [has_all_products 𝒞] [has_exponentiation 𝒞] (a : 𝒞) {b c : 𝒞} (f : 𝒞.hom b c)
+: 𝒞.hom (exp b a).ob (exp c a).ob := (exp c a).ue (exp b a).ob (𝒞.compose f (exp b a).ev) 
 
 -- Some useful lemmas.
 
@@ -54,13 +54,13 @@ def exp_hom {C : category} [has_all_products C] [has_exponentiation C] (a : C) {
 --
 -- So it does not matter whether we eval the exponential and then apply f, or apply exp_hom f
 -- and the eval the exponential.
-lemma simp_exp_hom {C : category} [has_all_products C] [has_exponentiation C] (a : C) {b c : C}
-(f : C.hom b c) : C.compose (exp c a).ev (product_morphism (exp_hom a f) (C.id a)) = C.compose f (exp b a).ev :=
+lemma simp_exp_hom {𝒞 : category} [has_all_products 𝒞] [has_exponentiation 𝒞] (a : 𝒞) {b c : 𝒞}
+(f : 𝒞.hom b c) : 𝒞.compose (exp c a).ev (product_morphism (exp_hom a f) (𝒞.id a)) = 𝒞.compose f (exp b a).ev :=
   begin
     unfold exp_hom,
     symmetry,
     -- this is exactly the mapping property
-    exact (exp c a).ump (exp b a).ob (C.compose f (exp b a).ev),
+    exact (exp c a).ump (exp b a).ob (𝒞.compose f (exp b a).ev),
   end
 
 end category_theory

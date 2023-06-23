@@ -8,8 +8,8 @@ namespace category_theory
 -- Constructing the adjunction structure for Δ⊣×.
 -- Δ is a functor from C to C×C
 -- × is a functor from C×C to C
-def diagonal_product_adjoint (C : category) [has_all_products C]
-: adjunction_hom (diagonal_functor C) (product_functor C) :=
+def diagonal_product_adjoint (𝒞 : category) [has_all_products 𝒞]
+: adjunction_hom (diagonal_functor 𝒞) (product_functor 𝒞) :=
 {
   φ :=
   -- φ maps a morphism h (=⟨f,g⟩) in C×C from ⟨c,c⟩ to d (=⟨a,b⟩)
@@ -30,8 +30,8 @@ def diagonal_product_adjoint (C : category) [has_all_products C]
     begin
       intros c d h,
       let axb := po d.fst d.snd,
-      let ca := C.compose axb.p₁ h,
-      let cb := C.compose axb.p₂ h,
+      let ca := 𝒞.compose axb.p₁ h,
+      let cb := 𝒞.compose axb.p₂ h,
       exact (ca, cb),
     end,
   sect :=
@@ -45,13 +45,13 @@ def diagonal_product_adjoint (C : category) [has_all_products C]
       let a := d.fst,
       let b := d.snd,
       -- Lean for some reason can't simplify (x, y).fst to x... so we spell it out for it
-      suffices q : ps (C.compose (po d.fst d.snd).p₁ h) (C.compose (po d.fst d.snd).p₂ h) = h,
+      suffices q : ps (𝒞.compose (po d.fst d.snd).p₁ h) (𝒞.compose (po d.fst d.snd).p₂ h) = h,
       exact q,
       -- both morphism in the ps are _ ∘ h, so we can change it to (ps _ _) ∘ h
       rw ← refl_ps_compose,
       -- and we have a ps with just the projections for a product, so it can be factored out
       rw simp_ps_id,
-      rw C.right_id,
+      rw 𝒞.right_id,
     end,
   retr :=
   -- φr is isomorphic
@@ -78,10 +78,10 @@ def diagonal_product_adjoint (C : category) [has_all_products C]
       intros,
       simp,
       rw refl_ps_pm,
-      rw C.assoc,
+      rw 𝒞.assoc,
       rw refl_ps_pm,
       rw simp_comp_left,
-      have q : (product_functor C).map_hom k = product_morphism k.fst k.snd,
+      have q : (product_functor 𝒞).map_hom k = product_morphism k.fst k.snd,
       refl,
       rw q,
       apply product_of_composible_morphisms,
@@ -90,28 +90,28 @@ def diagonal_product_adjoint (C : category) [has_all_products C]
     begin
       intros,
       simp,
-      have q : (diagonal_functor C).map_hom h = (h, h),
+      have q : (diagonal_functor 𝒞).map_hom h = (h, h),
       refl,
       rw q,
       erw refl_product_compose,
-      rw ← C.assoc,
-      rw ← C.assoc,
+      rw ← 𝒞.assoc,
+      rw ← 𝒞.assoc,
     end,
   naturality_dr :=
     begin
       intros,
       simp,
-      have q : (product_functor C).map_hom k = product_morphism k.fst k.snd,
+      have q : (product_functor 𝒞).map_hom k = product_morphism k.fst k.snd,
       refl,
       rw q,
       have r := product_morphism_commutes (po d.fst d.snd) (po d'.fst d'.snd) k.fst k.snd,
-      rw C.assoc,
+      rw 𝒞.assoc,
       rw ← r.left,
-      rw C.assoc,
+      rw 𝒞.assoc,
       rw ← r.right,
       erw refl_product_compose,
-      rw ← C.assoc,
-      rw ← C.assoc,
+      rw ← 𝒞.assoc,
+      rw ← 𝒞.assoc,
     end,
 }
 

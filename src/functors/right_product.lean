@@ -12,12 +12,12 @@ namespace category_theory
 -- c in C, we can define the functor ─×c mapping objects b
 -- to the product object b×c and morphisms  f:b→d to the
 -- product of morphisms f×id_c (from b×c to d×c).
-def r_product_functor {C : category} [has_all_products C] (c : C) : functor C C :=
+def r_product_functor {𝒞 : category} [has_all_products 𝒞] (c : 𝒞) : 𝒞 ⇒ 𝒞 :=
 {
   -- b → b×c
-  map_obj := λ (b : C), (po b c).p,
+  map_obj := λ (b : 𝒞), (po b c).p,
   -- f → f×id
-  map_hom := λ {b d : C} (f : C.hom b d), product_morphism f (C.id c),
+  map_hom := λ {b d : 𝒞} (f : 𝒞.hom b d), product_morphism f (𝒞.id c),
   -- already proved (id c)×(id d) = id (c×d)
   id :=
     begin
@@ -29,7 +29,7 @@ def r_product_functor {C : category} [has_all_products C] (c : C) : functor C C 
     begin
       intros,
       rw refl_product_morphism_compose,
-      rw C.left_id,
+      rw 𝒞.left_id,
     end,
 }
 
