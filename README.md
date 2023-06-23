@@ -42,7 +42,7 @@ The project was developed as part of the [Research Project](https://github.com/T
 There are currently no plans beyond this course.
 
 ## License
-Copyright (c) 2003 Ciprian Stanciu, Csanád Farkas, Markus Orav, Pedro Brandão Brandao de Araujo, Rado Todorov
+Copyright (c) 2023 Ciprian Stanciu, Csanád Farkas, Markus Orav, Pedro Brandão Brandao de Araujo, Rado Todorov
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
