@@ -58,8 +58,8 @@ def binary_tree_functor (α : Type u) : functor Types Types :=
 
 def tree_coalgebra {α : Types.C₀} : coalgebra (binary_tree_functor α) :=
 {
-  A := binary_tree α,
-  ϕ := λ s, (s.value, s.left, s.right)
+  object := binary_tree α,
+  morphism := λ s, (s.value, s.left, s.right)
 }
 
 end category_theory
