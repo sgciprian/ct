@@ -38,7 +38,7 @@ You should see it build without any problems.
   - Lucas Escot
 
 ## Project status
-The project was developed as a Research Project for a university course of the same name, given by TU Delft.
+The project was developed as part of the [Research Project](https://github.com/TU-Delft-CSE/Research-Project), edition 2023 Q4, of [TU Delft](https://github.com/TU-Delft-CSE) [[1]](https://www.tudelft.nl/).
 There are currently no plans beyond this course.
 
 ## License
